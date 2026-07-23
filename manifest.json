@@ -1,0 +1,15 @@
+{
+  "name": "Sub345 備戰計畫",
+  "short_name": "Sub345備戰",
+  "start_url": "./training_plan.html",
+  "display": "standalone",
+  "background_color": "#F4F1E8",
+  "theme_color": "#1B365D",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
