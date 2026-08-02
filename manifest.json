@@ -1,11 +1,16 @@
 {
-  "name": "Sub345 備戰計畫",
-  "short_name": "Sub345備戰",
-  "start_url": "./training_plan.html",
+  "name": "馬拉松備戰計畫",
+  "short_name": "備戰計畫",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#F4F1E8",
   "theme_color": "#1B365D",
   "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
