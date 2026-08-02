@@ -311,9 +311,14 @@
   .mileage-label strong { color: var(--navy); }
   .weekly-mileage-chart { margin-top: 12px; }
   .wmc-title { font-size: 0.78rem; color: #666; margin-bottom: 6px; }
+  .wmc-scroll {
+    overflow-x: auto; padding-bottom: 2px;
+  }
+  .wmc-inner {
+    min-width: 100%; width: max-content;
+  }
   .wmc-bars {
     display: flex; align-items: flex-end; gap: 2px; height: 90px;
-    overflow-x: auto; padding-bottom: 2px;
   }
   .wmc-bar-wrap {
     flex: 1 0 14px; min-width: 14px; height: 100%;
@@ -4859,8 +4864,10 @@
 
     box.innerHTML = `
       <div class="wmc-title">📊 每週里程趨勢（點選長條看該週明細）</div>
-      <div class="wmc-bars">${barsHtml}</div>
-      <div class="wmc-axis">${axisHtml}</div>
+      <div class="wmc-scroll"><div class="wmc-inner">
+        <div class="wmc-bars">${barsHtml}</div>
+        <div class="wmc-axis">${axisHtml}</div>
+      </div></div>
       <div class="wmc-readout" id="wmc-readout"></div>
       <div class="wmc-legend"><i style="background:var(--hit);"></i>已完成　<i style="background:var(--rest);"></i>規劃量</div>`;
 
