@@ -310,7 +310,17 @@
   }
   .mileage-label strong { color: var(--navy); }
   .weekly-mileage-chart { margin-top: 12px; }
-  .wmc-title { font-size: 0.78rem; color: #666; margin-bottom: 6px; }
+  .wmc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px; flex-wrap: wrap;
+  }
+  .wmc-title { font-size: 0.78rem; color: #666; }
+  .wmc-mode { display: flex; gap: 4px; }
+  .wmc-mode-btn {
+    font-size: 0.72rem; padding: 3px 12px; border-radius: 12px;
+    border: 1px solid var(--border); background: white; color: #666; cursor: pointer;
+  }
+  .wmc-mode-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
   .wmc-scroll {
     overflow-x: auto; padding-bottom: 2px;
   }
@@ -332,6 +342,8 @@
   .wmc-bar-done { width: 100%; background: var(--hit); border-radius: 2px 2px 0 0; }
   .wmc-bar-wrap.is-current .wmc-bar { outline: 1.5px solid var(--accent); }
   .wmc-bar-wrap.is-selected .wmc-bar { outline: 2px solid var(--navy); }
+  .wmc-bar-wrap.is-wide { flex: 1 0 30px; min-width: 30px; }
+  .wmc-axis span.is-wide { flex: 1 0 30px; min-width: 30px; }
   .wmc-readout {
     font-size: 0.8rem; color: #444; margin-top: 8px;
     background: var(--rest); border-radius: 6px; padding: 6px 10px;
@@ -350,6 +362,33 @@
     background: #FBEAE8; border: 1px solid var(--miss); color: #7A2118;
     border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 12px;
   }
+  .race-conflict-banner {
+    background: #FBEAE8; border: 1px solid var(--miss); color: #7A2118;
+    border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 12px; line-height: 1.6;
+  }
+  .race-density-banner {
+    background: #FFF3E0; border: 1px solid #E0A542; color: #8A5A10;
+    border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 12px; line-height: 1.6;
+  }
+  .wishlist-box {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; margin-top: 14px;
+  }
+  .wishlist-title { font-weight: bold; color: var(--navy); font-size: 0.9rem; margin-bottom: 10px; }
+  .wishlist-input-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .wishlist-input {
+    flex: 1; min-width: 120px; font-size: 0.8rem; padding: 5px 8px;
+    border: 1px solid var(--border); border-radius: 6px; color: var(--navy);
+  }
+  .wishlist-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 7px 10px; border-radius: 6px; background: var(--rest);
+    font-size: 0.82rem; margin-bottom: 6px;
+  }
+  .wishlist-item.is-open { background: #E6F4EA; color: var(--hit); font-weight: 600; }
+  .wishlist-item.is-soon { background: #FFF3E0; color: #8A5A10; font-weight: 600; }
+  .wishlist-del { cursor: pointer; color: #999; font-size: 0.9rem; padding: 0 4px; }
+  .wishlist-empty { font-size: 0.8rem; color: #999; }
   .pace-zone-box {
     background: white; border: 1px solid var(--border); border-radius: 10px;
     padding: 12px 14px; margin-bottom: 12px; font-size: 0.85rem;
@@ -751,6 +790,23 @@
   body.dark-mode .injury-alert-banner {
     background: #3A2320; border-color: #7A2118; color: #E8A79C;
   }
+  body.dark-mode .race-conflict-banner {
+    background: #3A2320; border-color: #7A2118; color: #E8A79C;
+  }
+  body.dark-mode .race-density-banner {
+    background: #332A1C; border-color: #E0A542; color: #E8C158;
+  }
+  body.dark-mode .wishlist-box {
+    background: #1E2430; border-color: #333A47; color: #D7DAE0;
+  }
+  body.dark-mode .wishlist-title { color: #8FB2E8; }
+  body.dark-mode .wishlist-input {
+    background: #262C38; color: #D7DAE0; border-color: #3A4150;
+  }
+  body.dark-mode .wishlist-item { background: #262C38; color: #D7DAE0; }
+  body.dark-mode .wishlist-item.is-open { background: #16321F; color: #7CD9A0; }
+  body.dark-mode .wishlist-item.is-soon { background: #332A1C; color: #E8C158; }
+  body.dark-mode .wishlist-empty { color: #9AA2B1; }
   body.dark-mode .pace-zone-box {
     background: #1E2430; border-color: #333A47; color: #D7DAE0;
   }
@@ -770,6 +826,12 @@
   }
   body.dark-mode .wmc-bar {
     background: #333A47;
+  }
+  body.dark-mode .wmc-mode-btn {
+    background: #1E2430; color: #9AA2B1; border-color: #333A47;
+  }
+  body.dark-mode .wmc-mode-btn.active {
+    background: #8FB2E8; color: #12151C; border-color: #8FB2E8;
   }
   body.dark-mode .wmc-readout {
     background: #262C38; color: #D7DAE0;
@@ -857,6 +919,8 @@
 <main>
   <section id="tab-races">
     <div class="pb-summary" id="pb-summary"></div>
+    <div id="race-conflict-banner" class="race-conflict-banner" style="display:none;"></div>
+    <div id="race-density-banner" class="race-density-banner" style="display:none;"></div>
     <div class="cycle-selector" id="race-year-selector">
       <button class="cycle-tab active" data-year-group="races-2026h2">2026 H2</button>
       <button class="cycle-tab" data-year-group="races-2027h1">2027 H1</button>
@@ -954,7 +1018,7 @@
         <div class="race-status">🕒 半馬報名中</div>
         <span class="race-checklist-progress"></span>
         <div class="race-primary-control"><button type="button" class="primary-toggle-btn" data-race-id="race-2026-6">🎯 設為本半年主要賽事</button><input type="text" class="race-goal-input" data-race-id="race-2026-6" placeholder="目標完賽時間，只需輸入數字 (例: 34500)"><span class="race-goal-pace" data-race-id="race-2026-6"></span></div>
-        <div class="race-note">全馬組已放榜未中籤，但另有9999元保證名額方案可補；半馬組登記中(7/27-8/10)，8/11抽籤、8/12放榜，待半馬結果出爐後再決定是否啟用全馬保證名額</div>
+        <div class="race-note">全馬未中籤（另有 9999 元保證名額可補）。半馬登記中 7/27–8/10，8/12 放榜；等半馬結果再決定要不要用保證名額。</div>
         <div class="race-checklist-slot"></div>
         <div class="prerace-checklist-slot"></div>
         <div class="race-expense-slot"></div>
@@ -991,7 +1055,7 @@
         <div class="race-status">🔄 備胎計畫</div>
         <span class="race-checklist-progress"></span>
         <div class="race-primary-control"><button type="button" class="primary-toggle-btn" data-race-id="race-2027-2">🎯 設為本半年主要賽事</button><input type="text" class="race-goal-input" data-race-id="race-2027-2" placeholder="目標完賽時間，只需輸入數字 (例: 34500)"><span class="race-goal-pace" data-race-id="race-2027-2"></span></div>
-        <div class="race-note">已依 JTB 官方頁面確認：海外(非日本籍)跑者須透過 JTB 體育台(jtbsports.jp)報名，不能走日本國內 RUNNET。流程為 ①報名 7/28(二)10:00-8/28(五)17:00 → ②超額抽籤 → ③9/28(一) email 通知結果與付款指南 → ④中籤者才付款(逾期未繳=資格無效)。💡報名時不需付錢,沒中籤不會有任何花費。費用：個人組頁面顯示 USD155(=參加費145＋慈善募金2口×5)，另加 11% 手續費，實付約 USD172，限信用卡。⚠️報名後不得因個人因素取消或更改。中籤通知只寄到報名信箱(@jtb.com/@mail.jtb.jp)，先確認不會被擋垃圾信</div>
+        <div class="race-note">海外須透過 JTB 體育台(jtbsports.jp)報名，不可用 RUNNET。<br>報名 7/28 10:00–8/28 17:00 → 9/28 email 通知 → 中籤後才繳費（逾期失格）。<br>💡報名不用付錢，沒中籤零花費。費用約 USD172（155＋11% 手續費），限信用卡。<br>⚠️報名後不得取消。通知信網域 @jtb.com／@mail.jtb.jp，先確認別被當垃圾信。</div>
         <div class="race-checklist-slot"></div>
         <div class="prerace-checklist-slot"></div>
         <div class="race-expense-slot"></div>
@@ -1007,7 +1071,7 @@
         <div class="race-status">⏳ 等待報名開放</div>
         <span class="race-checklist-progress"></span>
         <div class="race-primary-control"><button type="button" class="primary-toggle-btn" data-race-id="race-2027-3">🎯 設為本半年主要賽事</button><input type="text" class="race-goal-input" data-race-id="race-2027-3" placeholder="目標完賽時間，只需輸入數字 (例: 34500)"><span class="race-goal-pace" data-race-id="race-2027-3"></span></div>
-        <div class="race-note">官方已公布時程(日本時間,台灣慢1小時)：一般抽籤報名 2026/8/14(五)11:00-8/28(五)17:00 → 9/18(五)公布結果 → 中籤者須於 9/30(三)17:00 前繳費(逾期失格)。💡報名時不需付錢,沒中籤不收費。海外跑者報名費 USD230(已含稅與手續費)。20週年擴大至4萬人,一般抽籤約25,000名額。超額時依序抽籤：ONE TOKYO 三屆連續落選者(4,000)→東京都民(1,000)→一般抽籤</div>
+        <div class="race-note">報名 8/14 11:00–8/28 17:00 → 9/18 公布 → 9/30 17:00 前繳費（逾期失格）。以上為日本時間，台灣慢 1 小時。<br>💡報名不用付錢，沒中籤零花費。海外報名費 USD230（含稅與手續費）。<br>20 週年擴至 4 萬人，一般抽籤約 25,000 名額。</div>
         <div class="race-checklist-slot"></div>
         <div class="prerace-checklist-slot"></div>
         <div class="race-expense-slot"></div>
@@ -1018,6 +1082,16 @@
 
     <div class="cycle-placeholder">
       📌 之後每年新確定的賽事，會以新的年份分組加在這裡，之前年份的資料維持不動。
+    </div>
+
+    <div class="wishlist-box">
+      <div class="wishlist-title">🔔 想報名的賽事（追蹤報名開放日）</div>
+      <div class="wishlist-input-row">
+        <input type="text" id="wishlist-name" class="wishlist-input" placeholder="賽事名稱">
+        <input type="date" id="wishlist-date" class="wishlist-input">
+        <button type="button" id="wishlist-add-btn" class="backup-btn">＋ 加入</button>
+      </div>
+      <div id="wishlist-items"></div>
     </div>
   </section>
 
@@ -1605,7 +1679,7 @@
           <div class="skip-reason-tag" data-key="week-5-day6" style="display:none;"></div>
         </div>
       </div>
-      <div class="week-note">轉入MP配速體感期<br>7/27 臺北馬半馬開放登記(至8/10)<br>7/28 大阪馬一般登記開始，海外跑者須透過JTB體育台報名（登記至8/28，報名免付款，中籤後才付款）</div>
+      <div class="week-note">轉入MP配速體感期<br>7/27 臺北馬半馬開放登記(至8/10)<br>7/28 大阪馬開始登記(至8/28)，海外走JTB體育台，中籤後才付款</div>
     </div>
     <div class="week-block" id="week-6">
       <div class="week-header">
@@ -4458,15 +4532,15 @@
     </div>
 
     <div class="cycle-placeholder">
-      📌 下一個訓練週期（大阪馬 或 東京馬，2027上半年）將在目標賽事確定後新增於此，屆時會以獨立週期卡呈現，不影響上方神戶馬週期的內容與打卡紀錄。
+      📌 下一個週期（大阪馬／東京馬，2027上半年）待抽籤結果確定後新增，不影響神戶馬週期的打卡紀錄。
     </div>
   </section>
 
   <section id="tab-scenarios">
     <div class="scenario-intro">
       🎯 <b>賽事抉擇與歷史紀錄</b><br>
-      倫敦馬已確認沒中籤，最終目標賽事將依大阪馬（官方已公布：一般登記2026/7/28-8/28，9/28抽籤結果mail通知；⚠️海外跑者須透過JTB體育台報名，不能走日本國內RUNNET系統，報名免付款、中籤後才付款）、2026/9/18（東京馬）抽籤結果決定。目標賽事一旦確定，會直接在「備戰週期」新增對應的訓練週期卡。<br><br>
-      下面這張表用來記錄「每一場你考慮過或參加過的賽事」，不限8大馬，國內賽事（台北馬、渣打、萬金石等）想加就加、想追蹤幾年都可以，之後再抽同一場時可以往左滑看歷史紀錄參考。
+      倫敦馬未中籤。最終目標賽事依大阪馬（9/28 放榜）與東京馬（9/18 放榜）結果決定，確定後會在「備戰週期」新增對應週期卡。<br><br>
+      下表記錄每一場考慮過或參加過的賽事，不限八大馬，國內賽事也可自行加入、逐年追蹤，往左滑可看歷史紀錄。
     </div>
     <div id="lottery-reminders"></div>
 
@@ -4482,7 +4556,7 @@
           <tbody id="race-history-body"></tbody>
         </table>
       </div>
-      <div class="week-note">點格子依序切換：空白 → 📝計畫參賽 → 🎲抽籤中 → ❌抽籤未中 → ✅確定參賽 → 🏆完賽(目標賽事) → 🏃完賽(非目標賽事) → 回到空白。除了❌抽籤未中，其他狀態都會問「幾公里」跟「比賽日期」，同一場賽事每年可以填不同距離。賽事名稱旁的✕可以整列刪除。表格可左右滑動查看到2050年。</div>
+      <div class="week-note">點格子循環切換狀態：空白 → 📝計畫 → 🎲抽籤中 → ❌未中 → ✅確定參賽 → 🏆完賽(目標) → 🏃完賽(非目標) → 空白。除❌外都會問距離與日期。✕可刪整列，表格可左右滑到 2050 年。</div>
     </div>
   </section>
 
@@ -4490,8 +4564,8 @@
   <section id="tab-majors">
     <div class="scenario-intro">
       👑 <b>世界八大馬：人生清單，不趕四年deadline</b><br>
-      以神戶馬（2026/11/15）打底，接下來就是一份「有機會就去，沒有也不急」的清單，不特別綁定要在哪一年前集滿。抽籤這件事本來就是佛系參加，但執行上還是有系統：<b>每半年（1-6月一組、7-12月一組）鎖定一個還沒完成的目標賽事</b>，如果那半年抽籤都沒中，就改找一場自己想去、好玩的賽事完賽，維持跑步習慣不中斷，該星星留到之後有機會再抽。已完成的大滿貫不用再抽，系統會自動略過。<br><br>
-      <b>⚠️ 開普敦是獨立的第8顆星，不是倫敦備案</b>：開普敦 2026/6 已正式升格為官方第8大滿貫，2027屆比賽日 5/23，但抽籤已於 2026/6/10-24 額滿截止（6/26放榜），現在報名已經來不及。更重要的是，開普敦每年的抽籤都在<b>6月</b>（比賽日隔年5月），倫敦抽籤結果要到<b>7月初</b>才公布——開普敦抽籤時間點比倫敦結果還早，兩者在時間序上無法「沒中倫敦才轉開普敦」，所以兩場改成<b>各自獨立、每年都抽</b>，互不牽動。
+      以神戶馬（2026/11/15）打底，之後「有機會就去，沒有也不急」。作法：<b>每半年鎖定一個還沒完成的目標賽事</b>，那半年都沒中就改找一場想去的賽事完賽，維持習慣，星星留到之後再抽。已完成的不會再出現。<br><br>
+      <b>⚠️ 開普敦是獨立的第8顆星，不是倫敦備案</b>：開普敦抽籤在每年 6 月，倫敦結果 7 月初才公布，時間上無法「沒中倫敦才轉開普敦」，兩場各自獨立、每年都抽。2027 屆（5/23）抽籤已於 2026/6 截止。
     </div>
 
     <div id="star-checklist" class="star-checklist"></div>
@@ -4522,7 +4596,7 @@
           </tbody>
         </table>
       </div>
-      <div class="week-note">若當年上半年鎖定的目標都沒中籤，改找一場喜歡的賽事（不限馬拉松距離）完賽，維持習慣即可，未完成星星留到之後再抽。實際登記日期每年會變動，行動前務必上官網確認。</div>
+      <div class="week-note">上半年目標都沒中籤，就改找一場喜歡的賽事完賽（不限距離），星星留到之後再抽。⚠️登記日期每年變動，行動前請上官網確認。</div>
     </div>
 
     <div class="mainline-section">
@@ -4538,7 +4612,7 @@
           </tbody>
         </table>
       </div>
-      <div class="week-note">若當年下半年鎖定的目標都沒中籤，改找一場喜歡的賽事完賽，維持習慣即可，未完成星星留到之後再抽。實際登記日期每年會變動，行動前務必上官網確認。</div>
+      <div class="week-note">下半年目標都沒中籤，就改找一場喜歡的賽事完賽，星星留到之後再抽。⚠️登記日期每年變動，行動前請上官網確認。</div>
     </div>
 
     <div class="mainline-section">
@@ -4622,7 +4696,7 @@
 </div>
 
 <div class="finish-strip"></div>
-<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/02</footer>
+<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/03</footer>
 
 <script>
   // 標準賽事距離（公里）常數：放在最前面宣告，避免被任何提早執行的函式（例如頁面載入時就會跑一次的
@@ -4820,17 +4894,15 @@
     renderWeeklyMileageChart();
   }
 
-  // 週里程趨勢圖：把每週的規劃量畫成長條，已完成部分用綠色疊在上面，
+  // 里程趨勢圖：週／月兩種檢視。長條為規劃量，綠色疊層為已完成，
   // 一眼看出漸進負荷是否合理（漢森法核心：避免單週暴衝）。純 CSS 長條，不依賴外部圖表套件。
-  function renderWeeklyMileageChart() {
-    const box = document.getElementById('weekly-mileage-chart');
-    if (!box) return;
-    const blocks = document.querySelectorAll('#tab-weekly .week-block[id]');
-    if (!blocks.length) { box.innerHTML = ''; return; }
-    const todayStr = todayISO();
+  let MILEAGE_CHART_MODE = 'week'; // 'week' | 'month'
 
+  // 以週為單位彙總（沿用課表的 week-block 分組）
+  function collectWeeklyMileage() {
+    const todayStr = todayISO();
     const weeks = [];
-    blocks.forEach(block => {
+    document.querySelectorAll('#tab-weekly .week-block[id]').forEach(block => {
       let planned = 0, done = 0, isCurrent = false;
       block.querySelectorAll('.day-cell').forEach(cell => {
         const contentEl = cell.querySelector('.day-content');
@@ -4840,30 +4912,62 @@
         if (cell.dataset.date === todayStr) isCurrent = true;
       });
       const labelEl = block.querySelector('.week-num');
-      weeks.push({
-        label: labelEl ? labelEl.textContent.trim() : block.id,
-        planned, done, isCurrent,
-      });
+      weeks.push({ label: labelEl ? labelEl.textContent.trim() : block.id, planned, done, isCurrent });
     });
+    return weeks;
+  }
 
-    const maxKm = Math.max(...weeks.map(w => w.planned), 1);
-    const barsHtml = weeks.map((w, i) => {
+  // 以月為單位彙總（跨週的那一週會依每天實際日期拆到對應月份，不會整週算進同一個月）
+  function collectMonthlyMileage() {
+    const todayMonth = todayISO().slice(0, 7);
+    const map = new Map();
+    document.querySelectorAll('#tab-weekly .day-cell[data-date]').forEach(cell => {
+      const ym = cell.dataset.date.slice(0, 7);
+      if (!map.has(ym)) map.set(ym, { planned: 0, done: 0 });
+      const rec = map.get(ym);
+      const contentEl = cell.querySelector('.day-content');
+      const km = parseDayDistanceKm(contentEl ? contentEl.textContent : '');
+      rec.planned += km;
+      if (cell.classList.contains('status-done-cell')) rec.done += km;
+    });
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([ym, r]) => ({
+      label: `${+ym.slice(5, 7)}月`,
+      fullLabel: `${ym.slice(0, 4)}年${+ym.slice(5, 7)}月`,
+      planned: r.planned, done: r.done, isCurrent: ym === todayMonth,
+    }));
+  }
+
+  function renderWeeklyMileageChart() {
+    const box = document.getElementById('weekly-mileage-chart');
+    if (!box) return;
+    const isMonth = MILEAGE_CHART_MODE === 'month';
+    const items = isMonth ? collectMonthlyMileage() : collectWeeklyMileage();
+    if (!items.length) { box.innerHTML = ''; return; }
+
+    const maxKm = Math.max(...items.map(w => w.planned), 1);
+    const barsHtml = items.map((w, i) => {
       const plannedPct = (w.planned / maxKm) * 100;
       const donePct = w.planned > 0 ? Math.min((w.done / w.planned) * 100, 100) : 0;
-      return `<div class="wmc-bar-wrap${w.isCurrent ? ' is-current' : ''}" data-week-index="${i}">
+      return `<div class="wmc-bar-wrap${w.isCurrent ? ' is-current' : ''}${isMonth ? ' is-wide' : ''}" data-week-index="${i}">
           <div class="wmc-bar" style="height:${plannedPct.toFixed(1)}%;">
             <div class="wmc-bar-done" style="height:${donePct.toFixed(1)}%;"></div>
           </div>
         </div>`;
     }).join('');
 
-    // 每 5 週標一次週次，避免 37 個標籤全擠在一起看不清楚
-    const axisHtml = weeks.map((w, i) =>
-      `<span>${(i % 5 === 0) ? w.label.replace(/^W/, '') : ''}</span>`
+    // 月檢視項目少，每格都標；週檢視 37 格，每 5 週標一次避免擠成一團
+    const axisHtml = items.map((w, i) =>
+      `<span class="${isMonth ? 'is-wide' : ''}">${isMonth ? w.label.replace('月', '') : ((i % 5 === 0) ? w.label.replace(/^W/, '') : '')}</span>`
     ).join('');
 
     box.innerHTML = `
-      <div class="wmc-title">📊 每週里程趨勢（點選長條看該週明細）</div>
+      <div class="wmc-head">
+        <span class="wmc-title">📊 里程趨勢（點長條看明細）</span>
+        <span class="wmc-mode">
+          <button type="button" class="wmc-mode-btn${isMonth ? '' : ' active'}" data-mode="week">週</button>
+          <button type="button" class="wmc-mode-btn${isMonth ? ' active' : ''}" data-mode="month">月</button>
+        </span>
+      </div>
       <div class="wmc-scroll"><div class="wmc-inner">
         <div class="wmc-bars">${barsHtml}</div>
         <div class="wmc-axis">${axisHtml}</div>
@@ -4872,19 +4976,25 @@
       <div class="wmc-legend"><i style="background:var(--hit);"></i>已完成　<i style="background:var(--rest);"></i>規劃量</div>`;
 
     const readout = box.querySelector('#wmc-readout');
-    const showWeek = (i) => {
-      const w = weeks[i];
+    const showItem = (i) => {
+      const w = items[i];
       if (!w) return;
       const pct = w.planned > 0 ? Math.round((w.done / w.planned) * 100) : 0;
-      readout.innerHTML = `<b>${w.label}</b>　規劃 <b>${Math.round(w.planned)}K</b>　已完成 <b>${Math.round(w.done)}K</b>（${pct}%）`;
+      readout.innerHTML = `<b>${w.fullLabel || w.label}</b>　規劃 <b>${Math.round(w.planned)}K</b>　已完成 <b>${Math.round(w.done)}K</b>（${pct}%）`;
       box.querySelectorAll('.wmc-bar-wrap').forEach(el => el.classList.toggle('is-selected', +el.dataset.weekIndex === i));
     };
     box.querySelectorAll('.wmc-bar-wrap').forEach(el => {
-      el.addEventListener('click', () => showWeek(+el.dataset.weekIndex));
+      el.addEventListener('click', () => showItem(+el.dataset.weekIndex));
     });
-    // 預設先顯示本週（若今天不在訓練期內，則顯示最後一週），不用點也看得到數字
-    const defaultIndex = weeks.findIndex(w => w.isCurrent);
-    showWeek(defaultIndex >= 0 ? defaultIndex : weeks.length - 1);
+    box.querySelectorAll('.wmc-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        MILEAGE_CHART_MODE = btn.dataset.mode;
+        renderWeeklyMileageChart();
+      });
+    });
+    // 預設顯示本週／本月（不在訓練期內則顯示最後一項），不用點也看得到數字
+    const idx = items.findIndex(w => w.isCurrent);
+    showItem(idx >= 0 ? idx : items.length - 1);
   }
 
   function applyDayStatus(key, entry) {
@@ -4969,6 +5079,7 @@
       raceExpenses: loadRaceExpenses(),
       racePrimaryByHalf: loadRacePrimary(),
       raceGoalTimes: loadRaceGoals(),
+      raceWishlist: loadWishlist(),
       darkModeEnabled: localStorage.getItem('dark_mode_enabled') === 'true',
       dismissedReminders: loadDismissed(),
     };
@@ -5023,6 +5134,7 @@
             if (imported.raceExpenses) saveRaceExpenses(imported.raceExpenses);
             if (imported.racePrimaryByHalf) { saveRacePrimary(imported.racePrimaryByHalf); applyRacePrimaryStatus(); }
             if (imported.raceGoalTimes) { saveRaceGoals(imported.raceGoalTimes); applyRaceGoalInputs(); }
+            if (imported.raceWishlist) { saveWishlist(imported.raceWishlist); renderWishlist(); }
             if (typeof imported.darkModeEnabled === 'boolean') {
               localStorage.setItem('dark_mode_enabled', imported.darkModeEnabled.toString());
               applyDarkModePreference();
@@ -5039,7 +5151,7 @@
             renderPBSummary();
           }
           renderTodayCard();
-          alert(isNewFormat ? '進度已匯入！（含每日課表、八大馬完成度、年度規劃表、賽事歷史、PB紀錄、主要賽事與目標時間設定）' : '進度已匯入！（此為舊版備份檔，僅含每日課表資料）');
+          alert(isNewFormat ? '進度已匯入！（含每日課表、八大馬完成度、年度規劃表、賽事歷史、PB紀錄、主要賽事與目標時間、賽前檢查清單、想報名清單、顯示偏好）' : '進度已匯入！（此為舊版備份檔，僅含每日課表資料）');
         } catch (err) {
           alert('匯入失敗：檔案格式錯誤。');
         }
@@ -6130,6 +6242,128 @@
     localStorage.setItem(KEY, 'true');
   }
 
+  // ---- 賽事總表與課表的一致性檢查 ----
+  // 抓出「賽事總表有這場比賽，但課表當天卻排了一般訓練」的情況，
+  // 避免抽籤結果變動後忘了重排課表，導致比賽當天 App 還叫你去跑課表
+  function renderRaceConflictCheck() {
+    const banner = document.getElementById('race-conflict-banner');
+    if (!banner) return;
+    const cellByDate = {};
+    document.querySelectorAll('#tab-weekly .day-cell[data-date]').forEach(cell => {
+      cellByDate[cell.dataset.date] = cell;
+    });
+    const problems = [];
+    document.querySelectorAll('#tab-races .race-card[id]').forEach(card => {
+      const dEl = card.querySelector('.race-date');
+      const nEl = card.querySelector('.race-name');
+      if (!dEl) return;
+      const iso = dEl.textContent.trim().replace(/\//g, '-');
+      const cell = cellByDate[iso];
+      if (!cell) return; // 不在課表涵蓋範圍內，屬正常
+      if (!cell.classList.contains('intensity-race')) {
+        const contentEl = cell.querySelector('.day-content');
+        const raw = contentEl ? contentEl.textContent.replace(/^\d{2}\/\d{2}\([^)]*\)/, '').trim() : '';
+        problems.push({
+          name: nEl ? nEl.textContent.replace(/^🏃\s*/, '').trim() : '',
+          date: dEl.textContent.trim(),
+          plan: raw.split('[')[0].trim() || '一般課表',
+        });
+      }
+    });
+    if (!problems.length) { banner.style.display = 'none'; return; }
+    banner.innerHTML = '⚠️ <b>賽事與課表不一致</b>（確定參賽後需重排）<br>' + problems.map(p =>
+      `・${p.date} ${p.name} 當天課表排了「${p.plan}」`
+    ).join('<br>');
+    banner.style.display = '';
+  }
+
+  // ---- 賽事密集度警示：相鄰賽事間隔過短時提醒注意恢復 ----
+  function renderRaceDensityCheck() {
+    const banner = document.getElementById('race-density-banner');
+    if (!banner) return;
+    const races = [];
+    document.querySelectorAll('#tab-races .race-card[id]').forEach(card => {
+      const dEl = card.querySelector('.race-date');
+      const nEl = card.querySelector('.race-name');
+      if (!dEl) return;
+      const iso = dEl.textContent.trim().replace(/\//g, '-');
+      races.push({
+        date: new Date(iso + 'T00:00:00'),
+        label: dEl.textContent.trim(),
+        name: nEl ? nEl.textContent.replace(/^🏃\s*/, '').trim() : '',
+        category: card.dataset.category,
+      });
+    });
+    races.sort((a, b) => a.date - b.date);
+    const warns = [];
+    for (let i = 1; i < races.length; i++) {
+      const prev = races[i - 1], cur = races[i];
+      const days = Math.round((cur.date - prev.date) / 86400000);
+      if (days > 21) continue;
+      const bothFull = prev.category === 'full' && cur.category === 'full';
+      const afterFull = prev.category === 'full';
+      if (bothFull && days <= 21) {
+        warns.push(`・${prev.name} → ${cur.name} 僅隔 ${days} 天，兩場都是全馬`);
+      } else if (afterFull && days <= 14) {
+        warns.push(`・全馬 ${prev.name} 後僅 ${days} 天就有 ${cur.name}`);
+      } else if (days <= 7) {
+        warns.push(`・${prev.name} → ${cur.name} 僅隔 ${days} 天`);
+      }
+    }
+    if (!warns.length) { banner.style.display = 'none'; return; }
+    banner.innerHTML = '⚡ <b>賽事間隔提醒</b>（留意恢復）<br>' + warns.join('<br>');
+    banner.style.display = '';
+  }
+
+  // ---- 想報名的賽事：追蹤還沒開放報名的賽事，開放日接近時提醒 ----
+  const WISHLIST_KEY = 'kobe_race_wishlist';
+  function loadWishlist() {
+    try { return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || []; } catch (e) { return []; }
+  }
+  function saveWishlist(list) {
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+  }
+  function renderWishlist() {
+    const box = document.getElementById('wishlist-items');
+    if (!box) return;
+    const list = loadWishlist().slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    if (!list.length) {
+      box.innerHTML = '<div class="wishlist-empty">還沒加入任何想報名的賽事。填入名稱與預計報名開放日，開放前會在這裡提醒你。</div>';
+      return;
+    }
+    const today = todayISO();
+    box.innerHTML = list.map((item, i) => {
+      let cls = '', hint = '';
+      if (item.date) {
+        const days = Math.round((new Date(item.date + 'T00:00:00') - new Date(today + 'T00:00:00')) / 86400000);
+        if (days < 0) { cls = ' is-open'; hint = '🟢 已開放報名'; }
+        else if (days === 0) { cls = ' is-open'; hint = '🟢 今天開放報名！'; }
+        else if (days <= 14) { cls = ' is-soon'; hint = `⏰ 還有 ${days} 天開放`; }
+        else { hint = `還有 ${days} 天開放`; }
+      }
+      return `<div class="wishlist-item${cls}"><span>${item.name}${item.date ? `　<small>${item.date}</small>` : ''}　${hint}</span><span class="wishlist-del" data-idx="${i}">✕</span></div>`;
+    }).join('');
+    box.querySelectorAll('.wishlist-del').forEach(el => {
+      el.addEventListener('click', () => {
+        const sorted = loadWishlist().slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+        const target = sorted[+el.dataset.idx];
+        saveWishlist(loadWishlist().filter(x => !(x.name === target.name && x.date === target.date)));
+        renderWishlist();
+      });
+    });
+  }
+  document.getElementById('wishlist-add-btn')?.addEventListener('click', () => {
+    const nameEl = document.getElementById('wishlist-name');
+    const dateEl = document.getElementById('wishlist-date');
+    const name = nameEl.value.trim();
+    if (!name) { alert('請先填賽事名稱'); return; }
+    const list = loadWishlist();
+    list.push({ name, date: dateEl.value || '' });
+    saveWishlist(list);
+    nameEl.value = ''; dateEl.value = '';
+    renderWishlist();
+  });
+
   function renderYearStats(yearGroupId) {
     const statsBox = document.getElementById('race-stats-' + yearGroupId);
     const group = document.getElementById(yearGroupId);
@@ -6385,6 +6619,9 @@
   applyRacePrimaryStatus();
   applyRaceGoalInputs();
   renderPBSummary();
+  renderRaceConflictCheck();
+  renderRaceDensityCheck();
+  renderWishlist();
   renderPrepReminders();
 </script>
 
