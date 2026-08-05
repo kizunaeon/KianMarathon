@@ -4696,7 +4696,7 @@
 </div>
 
 <div class="finish-strip"></div>
-<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/03</footer>
+<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/05</footer>
 
 <script>
   // 標準賽事距離（公里）常數：放在最前面宣告，避免被任何提早執行的函式（例如頁面載入時就會跑一次的
@@ -6623,6 +6623,14 @@
   renderRaceDensityCheck();
   renderWishlist();
   renderPrepReminders();
+
+  // ---- 離線快取：註冊 Service Worker，讓「加到主畫面」後沒網路也能打開課表 ----
+  // 用 try/catch 包起來，本機用 file:// 開啟或不支援的環境會靜默失敗，不影響其他功能
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    });
+  }
 </script>
 
 </body>
