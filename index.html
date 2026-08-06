@@ -89,6 +89,25 @@
   .pb-card .pb-race { font-size: 0.78rem; opacity: 0.9; }
   .pb-card.empty { background: #F0F0EE; color: #999; }
   .pb-card.empty .pb-time { color: #999; font-size: 0.9rem; font-weight: 500; }
+  .fitness-assessment-box {
+    background: white; border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 16px; margin-bottom: 14px;
+  }
+  .fitness-title { font-weight: bold; color: var(--navy); font-size: 0.85rem; margin-bottom: 8px; }
+  .fitness-core-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .fitness-core-item {
+    flex: 1; min-width: 100px; background: var(--rest); border-radius: 8px;
+    padding: 8px 10px; text-align: center;
+  }
+  .fitness-core-item .fc-label { font-size: 0.68rem; color: #888; }
+  .fitness-core-item .fc-value { font-size: 1.1rem; font-weight: bold; color: var(--accent); }
+  .fitness-predict-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  }
+  .fitness-predict-item { text-align: center; }
+  .fitness-predict-item .fp-label { font-size: 0.68rem; color: #888; }
+  .fitness-predict-item .fp-value { font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+  .fitness-note { font-size: 0.68rem; color: #999; margin-top: 8px; }
   .race-finish-slot { margin-top: 8px; }
   .race-expense-slot { margin-top: 8px; }
   .race-expense-btn {
@@ -214,6 +233,16 @@
   }
   .split-chip.split-hit { background: #E1F5EA; border-color: var(--hit); color: #1E7A4C; font-weight: 600; }
   .split-chip.split-miss { background: #FBE4E1; border-color: var(--miss); color: #A3392A; font-weight: 600; }
+  .split-chip.split-fast { background: #E3F1FB; border-color: #5B9BD5; color: #2B6CA3; font-weight: 600; }
+  .session-result-badge {
+    margin-top: 8px; padding: 6px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-align: center;
+  }
+  .session-result-badge.ok { background: #E1F5EA; color: #1E7A4C; }
+  .session-result-badge.ng { background: #FBE4E1; color: #A3392A; }
+  .cal-modal-negsplit {
+    margin-top: 8px; font-size: 0.78rem; color: #2A5A9C; background: #EAF3FF;
+    border-radius: 6px; padding: 6px 8px;
+  }
   .cal-modal-actual-legend { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
   .cal-modal-actual-note { font-size: 0.68rem; color: #6B8CAE; margin-top: 6px; }
 
@@ -342,6 +371,12 @@
     border: 1px solid var(--border); background: white; color: #666; cursor: pointer;
   }
   .wmc-mode-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+  .chart-mode-control {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px; margin-bottom: 4px; flex-wrap: wrap; gap: 8px;
+  }
+  .cmc-title { font-size: 0.78rem; color: #666; }
+  .load-no-data { font-size: 0.8rem; color: #999; padding: 6px 10px; }
   .wmc-scroll {
     overflow-x: auto; padding-bottom: 2px;
   }
@@ -403,6 +438,29 @@
     background: #FFF3E0; border: 1px solid #E0A542; color: #8A5A10;
     border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 12px; line-height: 1.6;
   }
+  .load-overload-banner {
+    background: #FFF3E0; border: 1px solid #E0A542; color: #8A5A10;
+    border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 12px; line-height: 1.6;
+  }
+  .training-load-chart { margin-top: 14px; }
+  .tlc-title { font-size: 0.78rem; color: #666; }
+  .tlc-scroll { overflow-x: auto; padding-bottom: 2px; }
+  .tlc-inner { min-width: 100%; width: max-content; }
+  .tlc-bars { display: flex; align-items: flex-end; gap: 2px; height: 70px; }
+  .tlc-bar-wrap {
+    flex: 1 0 12px; min-width: 12px; height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; cursor: pointer;
+  }
+  .tlc-bar { width: 100%; background: var(--gold); border-radius: 2px 2px 0 0; }
+  .tlc-bar-wrap.is-today .tlc-bar { outline: 1.5px solid var(--accent); }
+  .tlc-bar-wrap.is-selected .tlc-bar { outline: 2px solid var(--navy); }
+  .tlc-bar-wrap.is-excessive .tlc-bar { background: var(--miss); }
+  .tlc-axis { display: flex; gap: 2px; font-size: 0.55rem; color: #999; margin-top: 3px; }
+  .tlc-axis span { flex: 1 0 12px; min-width: 12px; text-align: center; }
+  .tlc-readout { font-size: 0.8rem; color: #444; margin-top: 8px; background: var(--rest); border-radius: 6px; padding: 6px 10px; }
+  .tlc-readout b { color: var(--navy); }
+  .tlc-legend { font-size: 0.68rem; color: #999; margin-top: 6px; }
   .wishlist-box {
     background: white; border: 1px solid var(--border); border-radius: 10px;
     padding: 12px 14px; margin-top: 14px;
@@ -435,6 +493,19 @@
   .pace-zone-row b { color: var(--accent); }
   .pace-zone-note { font-size: 0.72rem; color: #999; margin-top: 6px; }
   .pace-zone-empty { color: #888; font-size: 0.85rem; }
+  .achievement-dashboard {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; margin-bottom: 12px;
+  }
+  .achv-title { font-weight: bold; color: var(--navy); font-size: 0.85rem; margin-bottom: 6px; }
+  .achv-value { font-size: 1.3rem; font-weight: bold; color: var(--accent); }
+  .achv-value small { font-size: 0.8rem; color: #888; font-weight: normal; }
+  .achv-list { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .achv-list span {
+    font-size: 0.7rem; padding: 2px 7px; border-radius: 10px;
+  }
+  .achv-list span.ok { background: #E1F5EA; color: #1E7A4C; }
+  .achv-list span.ng { background: #FBE4E1; color: #A3392A; }
   .progress-bar-inner::after {
     content: '🏃'; position: absolute; right: -10px; top: -7px; font-size: 0.9rem;
   }
@@ -743,11 +814,18 @@
   body.dark-mode .week-note,
   body.dark-mode .pb-card,
   body.dark-mode .race-goal-compare,
+  body.dark-mode .fitness-assessment-box,
   body.dark-mode footer {
     background: #1E2430;
     color: #D7DAE0;
     border-color: #333A47;
   }
+  body.dark-mode .fitness-title { color: #8FB2E8; }
+  body.dark-mode .fitness-core-item { background: #262C38; }
+  body.dark-mode .fitness-core-item .fc-label,
+  body.dark-mode .fitness-predict-item .fp-label { color: #9AA2B1; }
+  body.dark-mode .fitness-predict-item .fp-value { color: #D7DAE0; }
+  body.dark-mode .fitness-note { color: #6B8CAE; }
   body.dark-mode .race-goal-input,
   body.dark-mode .skip-reason-select,
   body.dark-mode input[type="text"] {
@@ -842,6 +920,15 @@
   body.dark-mode .race-density-banner {
     background: #332A1C; border-color: #E0A542; color: #E8C158;
   }
+  body.dark-mode .load-overload-banner {
+    background: #332A1C; border-color: #E0A542; color: #E8C158;
+  }
+  body.dark-mode .tlc-title,
+  body.dark-mode .tlc-axis,
+  body.dark-mode .tlc-legend { color: #9AA2B1; }
+  body.dark-mode .tlc-readout { background: #262C38; color: #D7DAE0; }
+  body.dark-mode .tlc-readout b { color: #8FB2E8; }
+  body.dark-mode .tlc-bar-wrap.is-selected .tlc-bar { outline-color: #8FB2E8; }
   body.dark-mode .wishlist-box {
     background: #1E2430; border-color: #333A47; color: #D7DAE0;
   }
@@ -865,6 +952,13 @@
   body.dark-mode .pace-zone-empty {
     color: #9AA2B1;
   }
+  body.dark-mode .achievement-dashboard {
+    background: #1E2430; border-color: #333A47;
+  }
+  body.dark-mode .achv-title { color: #8FB2E8; }
+  body.dark-mode .achv-value small { color: #9AA2B1; }
+  body.dark-mode .achv-list span.ok { background: #16321F; color: #7CD9A0; }
+  body.dark-mode .achv-list span.ng { background: #3A2320; color: #E8A79C; }
   body.dark-mode .wmc-title,
   body.dark-mode .wmc-legend,
   body.dark-mode .wmc-axis {
@@ -879,6 +973,8 @@
   body.dark-mode .wmc-mode-btn.active {
     background: #8FB2E8; color: #12151C; border-color: #8FB2E8;
   }
+  body.dark-mode .cmc-title { color: #9AA2B1; }
+  body.dark-mode .load-no-data { color: #6B8CAE; }
   body.dark-mode .wmc-readout {
     background: #262C38; color: #D7DAE0;
   }
@@ -935,6 +1031,10 @@
   }
   body.dark-mode .split-chip.split-hit { background: #16321F; border-color: #2E6B45; color: #7CD9A0; }
   body.dark-mode .split-chip.split-miss { background: #3A2320; border-color: #7A2118; color: #E8A79C; }
+  body.dark-mode .split-chip.split-fast { background: #1C2E3D; border-color: #4A7FAE; color: #8FC1E8; }
+  body.dark-mode .session-result-badge.ok { background: #16321F; color: #7CD9A0; }
+  body.dark-mode .session-result-badge.ng { background: #3A2320; color: #E8A79C; }
+  body.dark-mode .cal-modal-negsplit { background: #1C2A3A; color: #8FB2E8; }
   body.dark-mode .cal-modal-actual-note { color: #6B8CAE; }
   body.dark-mode .cal-day-cell.intensity-easy { background: #1C2E22; }
   body.dark-mode .cal-day-cell.intensity-tempo { background: #332A1C; }
@@ -977,6 +1077,7 @@
 <main>
   <section id="tab-races">
     <div class="pb-summary" id="pb-summary"></div>
+    <div id="fitness-assessment-box" class="fitness-assessment-box"></div>
     <div id="race-conflict-banner" class="race-conflict-banner" style="display:none;"></div>
     <div id="race-density-banner" class="race-density-banner" style="display:none;"></div>
     <div class="cycle-selector" id="race-year-selector">
@@ -1158,8 +1259,11 @@
       <div id="progress-label">完成進度：0 / 210 天</div>
       <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-bar"></div></div>
       <div id="mileage-label" class="mileage-label"></div>
+      <div id="chart-mode-control" class="chart-mode-control"></div>
       <div id="weekly-mileage-chart" class="weekly-mileage-chart"></div>
+      <div id="training-load-chart" class="training-load-chart"></div>
     </div>
+    <div id="load-overload-banner" class="load-overload-banner" style="display:none;"></div>
     <div id="injury-alert-banner" class="injury-alert-banner" style="display:none;"></div>
     <div class="bulk-mark-box">
       <div class="bulk-mark-title">🗓️ 批次標記（生病／出差等連續多天）</div>
@@ -1184,6 +1288,7 @@
       <div id="bulk-mark-result" class="bulk-mark-result"></div>
     </div>
     <div id="pace-zone-box" class="pace-zone-box"></div>
+    <div id="achievement-dashboard" class="achievement-dashboard"></div>
     <div class="intensity-legend">
       <span class="legend-item"><span class="legend-swatch rest"></span>休息</span>
       <span class="legend-item"><span class="legend-swatch easy"></span>輕鬆跑</span>
@@ -4776,15 +4881,24 @@
 </div>
 
 <div class="finish-strip"></div>
-<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/05</footer>
+<footer>此頁面內容由 Claude 直接維護與更新。<br>最後更新：2026/08/06</footer>
 
+<script type="application/json" id="training-load-data">
+{"2026-07-10": {"shortTerm": 134, "longTerm": 95, "ratio": 1.41, "comment": "Optimized"}, "2026-07-11": {"shortTerm": 148, "longTerm": 98, "ratio": 1.51, "comment": "Excessive"}, "2026-07-12": {"shortTerm": 178, "longTerm": 104, "ratio": 1.71, "comment": "Excessive"}, "2026-07-13": {"shortTerm": 152, "longTerm": 102, "ratio": 1.49, "comment": "Optimized"}, "2026-07-14": {"shortTerm": 153, "longTerm": 103, "ratio": 1.48, "comment": "Optimized"}, "2026-07-15": {"shortTerm": 164, "longTerm": 106, "ratio": 1.54, "comment": "Excessive"}, "2026-07-16": {"shortTerm": 140, "longTerm": 103, "ratio": 1.35, "comment": "Optimized"}, "2026-07-17": {"shortTerm": 141, "longTerm": 104, "ratio": 1.35, "comment": "Optimized"}, "2026-07-18": {"shortTerm": 146, "longTerm": 106, "ratio": 1.37, "comment": "Optimized"}, "2026-07-19": {"shortTerm": 172, "longTerm": 111, "ratio": 1.54, "comment": "Excessive"}, "2026-07-20": {"shortTerm": 148, "longTerm": 109, "ratio": 1.35, "comment": "Optimized"}, "2026-07-21": {"shortTerm": 147, "longTerm": 110, "ratio": 1.33, "comment": "Optimized"}, "2026-07-22": {"shortTerm": 155, "longTerm": 112, "ratio": 1.38, "comment": "Optimized"}, "2026-07-23": {"shortTerm": 133, "longTerm": 109, "ratio": 1.22, "comment": "Optimized"}, "2026-07-24": {"shortTerm": 134, "longTerm": 110, "ratio": 1.21, "comment": "Optimized"}, "2026-07-25": {"shortTerm": 133, "longTerm": 110, "ratio": 1.2, "comment": "Optimized"}, "2026-07-26": {"shortTerm": 166, "longTerm": 116, "ratio": 1.43, "comment": "Optimized"}, "2026-07-27": {"shortTerm": 142, "longTerm": 114, "ratio": 1.24, "comment": "Optimized"}, "2026-07-28": {"shortTerm": 149, "longTerm": 115, "ratio": 1.29, "comment": "Optimized"}, "2026-07-29": {"shortTerm": 162, "longTerm": 118, "ratio": 1.37, "comment": "Optimized"}, "2026-07-30": {"shortTerm": 139, "longTerm": 115, "ratio": 1.2, "comment": "Optimized"}, "2026-07-31": {"shortTerm": 139, "longTerm": 116, "ratio": 1.19, "comment": "Optimized"}, "2026-08-01": {"shortTerm": 146, "longTerm": 118, "ratio": 1.23, "comment": "Optimized"}, "2026-08-02": {"shortTerm": 173, "longTerm": 123, "ratio": 1.4, "comment": "Optimized"}, "2026-08-03": {"shortTerm": 148, "longTerm": 120, "ratio": 1.23, "comment": "Optimized"}, "2026-08-04": {"shortTerm": 127, "longTerm": 117, "ratio": 1.08, "comment": "Optimized"}, "2026-08-05": {"shortTerm": 109, "longTerm": 114, "ratio": 0.95, "comment": "Maintaining"}, "2026-08-06": {"shortTerm": 93, "longTerm": 112, "ratio": 0.83, "comment": "Maintaining"}}
+</script>
+<script type="application/json" id="fitness-assessment-data">
+{"updatedDate": "2026-08-06", "vo2max": 51, "runningLevel": 72, "thresholdPace": "5:15", "predictions": {"5k": "25:11", "10k": "52:38", "half": "1:59:25", "full": "4:15:35"}}
+</script>
 <script type="application/json" id="actual-training-data">
-{"2026-08-02": {"distance": 15.07, "duration": "1:35:16", "avgPace": "6'19\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速（長跑15K）", "kmSplits": ["7'18\"", "6'32\"", "6'28\"", "6'11\"", "6'12\"", "6'14\"", "6'08\"", "6'07\"", "6'16\"", "6'20\"", "6'24\"", "6'19\"", "6'07\"", "6'15\"", "6'00\"", "6'02\"(末段0.68K)"]}, "2026-08-01": {"distance": 8.43, "duration": "51:12", "avgPace": "6'05\"", "avgHr": 157, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'47\"", "6'17\"", "5'53\"", "5'56\"", "5'55\"", "6'11\"", "6'03\"", "5'47\"", "5'38\"(末段0.43K)"]}, "2026-07-31": {"distance": 8.12, "duration": "52:52", "avgPace": "6'31\"", "avgHr": 148, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["7'05\"", "6'49\"", "6'44\"", "6'25\"", "6'19\"", "6'15\"", "6'19\"", "6'14\"", "5'55\"(末段0.12K)"]}, "2026-07-29": {"distance": 9.51, "duration": "56:56", "avgPace": "5'59\"", "avgHr": 163, "location": "新竹", "kmSplitLabel": "每公里配速（配速跑，目標5'15\"-5'25\"）", "kmSplits": ["6'30\"(暖身)", "5'25\"", "5'24\"", "5'22\"", "5'18\"", "5'19\"", "5'21\"", "5'24\"", "5'20\""]}, "2026-07-28": {"distance": 8.18, "duration": "49:45", "avgPace": "6'05\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'13\"", "6'05\"", "6'12\"", "6'16\"", "6'07\"", "6'04\"", "5'57\"", "5'51\"", "5'35\"(末段0.18K)"]}, "2026-07-26": {"distance": 15.06, "duration": "1:32:43", "avgPace": "6'09\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速（長跑15K）", "kmSplits": ["6'19\"", "6'06\"", "5'56\"", "5'57\"", "5'54\"", "6'03\"", "6'08\"", "6'15\"", "6'21\"", "6'17\"", "6'15\"", "6'07\"", "6'20\"", "6'14\"", "6'09\"", "6'07\"(末段0.06K)"]}, "2026-07-25": {"distance": 8.27, "duration": "51:28", "avgPace": "6'13\"", "avgHr": 146, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'57\"", "6'33\"", "6'23\"", "6'08\"", "6'01\"", "5'59\"", "5'59\"", "5'56\"", "5'39\"(末段0.27K)"]}, "2026-07-24": {"distance": 8.39, "duration": "53:28", "avgPace": "6'23\"", "avgHr": 148, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'54\"", "6'31\"", "6'25\"", "6'19\"", "6'09\"", "6'15\"", "6'14\"", "6'20\"", "6'04\"(末段0.39K)"]}, "2026-07-22": {"distance": 7.89, "duration": "59:07", "avgPace": "7'29\"", "avgHr": 147, "location": "新竹", "splitLabel": "1200m×4 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'28\""}, {"rep": 2, "pace": "4'44\""}, {"rep": 3, "pace": "5'05\""}, {"rep": 4, "pace": "5'20\""}]}, "2026-07-21": {"distance": 8.07, "duration": "48:57", "avgPace": "6'04\"", "avgHr": 151, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'09\"", "6'10\"", "6'14\"", "6'10\"", "6'12\"", "6'02\"", "5'57\"", "5'42\"", "5'32\"(末段0.07K)"]}, "2026-07-19": {"distance": 14.03, "duration": "1:28:34", "avgPace": "6'19\"", "avgHr": 158, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'57\"", "6'33\"", "6'23\"", "6'05\"", "6'12\"", "6'16\"", "6'07\"", "6'12\"", "6'18\"", "6'10\"", "6'24\"", "6'15\"", "6'13\"", "6'19\""]}, "2026-07-18": {"distance": 8.3, "duration": "51:02", "avgPace": "6'09\"", "avgHr": 155, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'37\"", "6'07\"", "5'59\"", "6'08\"", "6'07\"", "6'08\"", "6'12\"", "6'04\"", "5'30\"(末段0.30K)"]}, "2026-07-17": {"distance": 8.11, "duration": "51:55", "avgPace": "6'24\"", "avgHr": 150, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'59\"", "6'38\"", "6'41\"", "6'10\"", "6'06\"", "6'11\"", "6'15\"", "6'16\"", "5'52\"(末段0.11K)"]}, "2026-07-15": {"distance": 9.02, "duration": "55:33", "avgPace": "6'09\"", "avgHr": 153, "location": "新竹", "splitLabel": "1200m×4 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'43\""}, {"rep": 2, "pace": "4'46\""}, {"rep": 3, "pace": "4'47\""}, {"rep": 4, "pace": "4'43\""}]}, "2026-07-14": {"distance": 8.11, "duration": "50:24", "avgPace": "6'13\"", "avgHr": 153, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'53\"", "6'20\"", "6'16\"", "6'17\"", "6'19\"", "6'03\"", "6'01\"", "5'38\"", "5'44\"(末段0.11K)"]}, "2026-07-12": {"distance": 14.0, "duration": "1:33:28", "avgPace": "6'41\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'42\"", "6'34\"", "6'26\"", "6'37\"", "6'45\"", "6'42\"", "6'36\"", "6'38\"", "6'26\"", "6'35\"", "6'55\"", "6'58\"", "6'52\"", "6'41\""]}, "2026-07-11": {"distance": 8.4, "duration": "53:34", "avgPace": "6'23\"", "avgHr": 162, "location": "室內", "indoor": true, "kmSplitLabel": "每公里配速", "kmSplits": ["7'22\"", "6'38\"", "6'34\"", "6'35\"", "6'35\"", "6'35\"", "6'33\"", "6'33\"", "7'04\"(末段0.02K)"]}, "2026-07-10": {"distance": 8.24, "duration": "52:42", "avgPace": "6'24\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'45\"", "6'48\"", "6'27\"", "6'17\"", "6'15\"", "6'21\"", "6'14\"", "6'08\"", "5'59\"(末段0.24K)"]}, "2026-07-08": {"distance": 7.43, "duration": "52:48", "avgPace": "7'07\"", "avgHr": 150, "location": "新竹", "splitLabel": "1000m×5 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'38\""}, {"rep": 2, "pace": "4'40\""}, {"rep": 3, "pace": "5'15\""}, {"rep": 4, "pace": "6'12\""}, {"rep": 5, "pace": "5'58\""}]}, "2026-07-07": {"distance": 8.16, "duration": "53:40", "avgPace": "6'35\"", "avgHr": 152, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["7'01\"", "6'47\"", "6'45\"", "6'37\"", "6'33\"", "6'23\"", "6'24\"", "6'16\"", "5'46\"(末段0.16K)"]}, "2026-07-05": {"distance": 13.06, "duration": "1:23:17", "avgPace": "6'23\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'47\"", "6'37\"", "6'26\"", "6'13\"", "6'11\"", "6'13\"", "6'21\"", "6'08\"", "6'22\"", "6'33\"", "6'30\"", "6'22\"", "6'11\"(末段0.06K)"]}, "2026-07-04": {"distance": 9.18, "duration": "57:20", "avgPace": "6'15\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'29\"", "6'29\"", "6'10\"", "6'04\"", "6'13\"", "6'09\"", "6'23\"", "6'29\"", "5'52\"", "5'29\"(末段0.18K)"]}, "2026-07-03": {"distance": 8.09, "duration": "53:06", "avgPace": "6'34\"", "avgHr": 149, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'44\"", "6'29\"", "6'36\"", "6'44\"", "6'29\"", "6'31\"", "6'34\"", "6'26\"", "5'54\"(末段0.09K)"]}, "2026-07-01": {"distance": 8.72, "duration": "56:47", "avgPace": "6'31\"", "avgHr": 153, "location": "新竹", "splitLabel": "1000m×5 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'31\""}, {"rep": 2, "pace": "4'34\""}, {"rep": 3, "pace": "4'33\""}, {"rep": 4, "pace": "4'36\""}, {"rep": 5, "pace": "4'39\""}]}, "2026-06-30": {"distance": 8.05, "duration": "51:44", "avgPace": "6'25\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'26\"", "6'30\"", "6'21\"", "6'22\"", "6'31\"", "6'27\"", "6'21\"", "6'26\"", "6'37\"(末段0.05K)"]}, "2026-06-28": {"distance": 13.0, "duration": "1:20:38", "avgPace": "6'12\"", "avgHr": 167, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'21\"", "6'10\"", "5'59\"", "6'07\"", "5'39\"", "6'02\"", "6'11\"", "6'15\"", "6'18\"", "6'23\"", "6'20\"", "6'34\"", "6'16\""]}, "2026-06-27": {"distance": 8.03, "duration": "50:51", "avgPace": "6'20\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'12\"", "6'29\"", "6'28\"", "6'19\"", "6'21\"", "6'20\"", "6'15\"", "6'14\"", "5'48\"(末段0.03K)"]}, "2026-06-24": {"distance": 10.38, "duration": "1:16:21", "avgPace": "7'21\"", "avgHr": 146, "location": "新竹", "splitLabel": "600m×8 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'35\""}, {"rep": 2, "pace": "4'32\""}, {"rep": 3, "pace": "4'32\""}, {"rep": 4, "pace": "4'31\""}, {"rep": 5, "pace": "4'37\""}, {"rep": 6, "pace": "4'43\""}, {"rep": 7, "pace": "4'42\""}, {"rep": 8, "pace": "4'40\""}]}, "2026-06-23": {"distance": 8.11, "duration": "53:09", "avgPace": "6'33\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'42\"", "6'52\"", "6'35\"", "6'29\"", "6'32\"", "6'33\"", "6'23\"", "6'21\"", "6'17\"(末段0.11K)"]}}
+{"2026-08-02": {"distance": 15.07, "duration": "1:35:16", "avgPace": "6'19\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速（長跑15K）", "kmSplits": ["7'18\"", "6'32\"", "6'28\"", "6'11\"", "6'12\"", "6'14\"", "6'08\"", "6'07\"", "6'16\"", "6'20\"", "6'24\"", "6'19\"", "6'07\"", "6'15\"", "6'00\"", "6'02\"(末段0.68K)"], "cadence": 171, "aerobicTE": 4.6, "anaerobicTE": 2.8, "trainingFocus": "Tempo"}, "2026-08-01": {"distance": 8.43, "duration": "51:12", "avgPace": "6'05\"", "avgHr": 157, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'47\"", "6'17\"", "5'53\"", "5'56\"", "5'55\"", "6'11\"", "6'03\"", "5'47\"", "5'38\"(末段0.43K)"], "cadence": 175, "aerobicTE": 3.6, "anaerobicTE": 2.6, "trainingFocus": "Tempo"}, "2026-07-31": {"distance": 8.12, "duration": "52:52", "avgPace": "6'31\"", "avgHr": 148, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["7'05\"", "6'49\"", "6'44\"", "6'25\"", "6'19\"", "6'15\"", "6'19\"", "6'14\"", "5'55\"(末段0.12K)"], "cadence": 169, "aerobicTE": 3.3, "anaerobicTE": 1.4, "trainingFocus": "Tempo"}, "2026-07-29": {"distance": 9.51, "duration": "56:56", "avgPace": "5'59\"", "avgHr": 163, "location": "新竹", "kmSplitLabel": "每公里配速（配速跑，目標5'15\"-5'25\"）", "kmSplits": ["6'30\"(暖身)", "5'25\"", "5'24\"", "5'22\"", "5'18\"", "5'19\"", "5'21\"", "5'24\"", "5'20\""], "cadence": 166, "aerobicTE": 3.7, "anaerobicTE": 3.7, "trainingFocus": "Threshold"}, "2026-07-28": {"distance": 8.18, "duration": "49:45", "avgPace": "6'05\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'13\"", "6'05\"", "6'12\"", "6'16\"", "6'07\"", "6'04\"", "5'57\"", "5'51\"", "5'35\"(末段0.18K)"], "cadence": 167, "aerobicTE": 3.6, "anaerobicTE": 2.3, "trainingFocus": "Tempo"}, "2026-07-26": {"distance": 15.06, "duration": "1:32:43", "avgPace": "6'09\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速（長跑15K）", "kmSplits": ["6'19\"", "6'06\"", "5'56\"", "5'57\"", "5'54\"", "6'03\"", "6'08\"", "6'15\"", "6'21\"", "6'17\"", "6'15\"", "6'07\"", "6'20\"", "6'14\"", "6'09\"", "6'07\"(末段0.06K)"], "cadence": 174, "aerobicTE": 4.7, "anaerobicTE": 3.1, "trainingFocus": "Tempo"}, "2026-07-25": {"distance": 8.27, "duration": "51:28", "avgPace": "6'13\"", "avgHr": 146, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'57\"", "6'33\"", "6'23\"", "6'08\"", "6'01\"", "5'59\"", "5'59\"", "5'56\"", "5'39\"(末段0.27K)"], "cadence": 174, "aerobicTE": 3.1, "anaerobicTE": 1.8, "trainingFocus": "Tempo"}, "2026-07-24": {"distance": 8.39, "duration": "53:28", "avgPace": "6'23\"", "avgHr": 148, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'54\"", "6'31\"", "6'25\"", "6'19\"", "6'09\"", "6'15\"", "6'14\"", "6'20\"", "6'04\"(末段0.39K)"], "cadence": 169, "aerobicTE": 3.2, "anaerobicTE": 1.5, "trainingFocus": "Tempo"}, "2026-07-22": {"distance": 7.89, "duration": "59:07", "avgPace": "7'29\"", "avgHr": 147, "location": "新竹", "splitLabel": "1200m×4 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'28\""}, {"rep": 2, "pace": "4'44\""}, {"rep": 3, "pace": "5'05\""}, {"rep": 4, "pace": "5'20\""}], "cadence": 176, "cadenceNote": "衝刺趟平均，已排除暖身收操與趟間恢復慢跑", "aerobicTE": 3.3, "anaerobicTE": 4.0, "trainingFocus": "VO2 Max"}, "2026-07-21": {"distance": 8.07, "duration": "48:57", "avgPace": "6'04\"", "avgHr": 151, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'09\"", "6'10\"", "6'14\"", "6'10\"", "6'12\"", "6'02\"", "5'57\"", "5'42\"", "5'32\"(末段0.07K)"], "cadence": 169, "aerobicTE": 3.2, "anaerobicTE": 2.1, "trainingFocus": "Tempo"}, "2026-07-19": {"distance": 14.03, "duration": "1:28:34", "avgPace": "6'19\"", "avgHr": 158, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'57\"", "6'33\"", "6'23\"", "6'05\"", "6'12\"", "6'16\"", "6'07\"", "6'12\"", "6'18\"", "6'10\"", "6'24\"", "6'15\"", "6'13\"", "6'19\""], "cadence": 172, "aerobicTE": 4.6, "anaerobicTE": 2.7, "trainingFocus": "Tempo"}, "2026-07-18": {"distance": 8.3, "duration": "51:02", "avgPace": "6'09\"", "avgHr": 155, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'37\"", "6'07\"", "5'59\"", "6'08\"", "6'07\"", "6'08\"", "6'12\"", "6'04\"", "5'30\"(末段0.30K)"], "cadence": 172, "aerobicTE": 3.5, "anaerobicTE": 2.3, "trainingFocus": "Tempo"}, "2026-07-17": {"distance": 8.11, "duration": "51:55", "avgPace": "6'24\"", "avgHr": 150, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'59\"", "6'38\"", "6'41\"", "6'10\"", "6'06\"", "6'11\"", "6'15\"", "6'16\"", "5'52\"(末段0.11K)"], "cadence": 169, "aerobicTE": 3.3, "anaerobicTE": 1.6, "trainingFocus": "Tempo"}, "2026-07-15": {"distance": 9.02, "duration": "55:33", "avgPace": "6'09\"", "avgHr": 153, "location": "新竹", "splitLabel": "1200m×4 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'43\""}, {"rep": 2, "pace": "4'46\""}, {"rep": 3, "pace": "4'47\""}, {"rep": 4, "pace": "4'43\""}], "cadence": 184, "cadenceNote": "衝刺趟平均，已排除暖身收操與趟間恢復慢跑", "aerobicTE": 3.5, "anaerobicTE": 4.2, "trainingFocus": "VO2 Max"}, "2026-07-14": {"distance": 8.11, "duration": "50:24", "avgPace": "6'13\"", "avgHr": 153, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'53\"", "6'20\"", "6'16\"", "6'17\"", "6'19\"", "6'03\"", "6'01\"", "5'38\"", "5'44\"(末段0.11K)"], "cadence": 169, "aerobicTE": 3.4, "anaerobicTE": 2.1, "trainingFocus": "Tempo"}, "2026-07-12": {"distance": 14.0, "duration": "1:33:28", "avgPace": "6'41\"", "avgHr": 159, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'42\"", "6'34\"", "6'26\"", "6'37\"", "6'45\"", "6'42\"", "6'36\"", "6'38\"", "6'26\"", "6'35\"", "6'55\"", "6'58\"", "6'52\"", "6'41\""], "cadence": 168, "aerobicTE": 4.9, "anaerobicTE": 1.7, "trainingFocus": "Base"}, "2026-07-11": {"distance": 8.4, "duration": "53:34", "avgPace": "6'23\"", "avgHr": 162, "location": "室內", "indoor": true, "kmSplitLabel": "每公里配速", "kmSplits": ["7'22\"", "6'38\"", "6'34\"", "6'35\"", "6'35\"", "6'35\"", "6'33\"", "6'33\"", "7'04\"(末段0.02K)"], "cadence": 174, "aerobicTE": 3.3, "anaerobicTE": 4.6, "trainingFocus": "Anaerobic"}, "2026-07-10": {"distance": 8.24, "duration": "52:42", "avgPace": "6'24\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'45\"", "6'48\"", "6'27\"", "6'17\"", "6'15\"", "6'21\"", "6'14\"", "6'08\"", "5'59\"(末段0.24K)"], "cadence": 173, "aerobicTE": 3.5, "anaerobicTE": 1.9, "trainingFocus": "Tempo"}, "2026-07-08": {"distance": 7.43, "duration": "52:48", "avgPace": "7'07\"", "avgHr": 150, "location": "新竹", "splitLabel": "1000m×5 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'38\""}, {"rep": 2, "pace": "4'40\""}, {"rep": 3, "pace": "5'15\""}, {"rep": 4, "pace": "6'12\""}, {"rep": 5, "pace": "5'58\""}], "cadence": 174, "cadenceNote": "衝刺趟平均，已排除暖身收操與趟間恢復慢跑", "aerobicTE": 3.3, "anaerobicTE": 3.5, "trainingFocus": "Threshold"}, "2026-07-07": {"distance": 8.16, "duration": "53:40", "avgPace": "6'35\"", "avgHr": 152, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["7'01\"", "6'47\"", "6'45\"", "6'37\"", "6'33\"", "6'23\"", "6'24\"", "6'16\"", "5'46\"(末段0.16K)"], "cadence": 164, "aerobicTE": 3.5, "anaerobicTE": 1.4, "trainingFocus": "Tempo"}, "2026-07-05": {"distance": 13.06, "duration": "1:23:17", "avgPace": "6'23\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'47\"", "6'37\"", "6'26\"", "6'13\"", "6'11\"", "6'13\"", "6'21\"", "6'08\"", "6'22\"", "6'33\"", "6'30\"", "6'22\"", "6'11\"(末段0.06K)"], "cadence": 172, "aerobicTE": 4.4, "anaerobicTE": 2.4, "trainingFocus": "Tempo"}, "2026-07-04": {"distance": 9.18, "duration": "57:20", "avgPace": "6'15\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'29\"", "6'29\"", "6'10\"", "6'04\"", "6'13\"", "6'09\"", "6'23\"", "6'29\"", "5'52\"", "5'29\"(末段0.18K)"], "cadence": 174, "aerobicTE": 3.6, "anaerobicTE": 2.3, "trainingFocus": "Tempo"}, "2026-07-03": {"distance": 8.09, "duration": "53:06", "avgPace": "6'34\"", "avgHr": 149, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'44\"", "6'29\"", "6'36\"", "6'44\"", "6'29\"", "6'31\"", "6'34\"", "6'26\"", "5'54\"(末段0.09K)"], "cadence": 170, "aerobicTE": 3.3, "anaerobicTE": 1.2, "trainingFocus": "Base"}, "2026-07-01": {"distance": 8.72, "duration": "56:47", "avgPace": "6'31\"", "avgHr": 153, "location": "新竹", "splitLabel": "1000m×5 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'31\""}, {"rep": 2, "pace": "4'34\""}, {"rep": 3, "pace": "4'33\""}, {"rep": 4, "pace": "4'36\""}, {"rep": 5, "pace": "4'39\""}], "cadence": 184, "cadenceNote": "衝刺趟平均，已排除暖身收操與趟間恢復慢跑", "aerobicTE": 3.6, "anaerobicTE": 4.8, "trainingFocus": "Anaerobic"}, "2026-06-30": {"distance": 8.05, "duration": "51:44", "avgPace": "6'25\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'26\"", "6'30\"", "6'21\"", "6'22\"", "6'31\"", "6'27\"", "6'21\"", "6'26\"", "6'37\"(末段0.05K)"], "cadence": 168, "aerobicTE": 3.6, "anaerobicTE": 1.6, "trainingFocus": "Tempo"}, "2026-06-28": {"distance": 13.0, "duration": "1:20:38", "avgPace": "6'12\"", "avgHr": 167, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'21\"", "6'10\"", "5'59\"", "6'07\"", "5'39\"", "6'02\"", "6'11\"", "6'15\"", "6'18\"", "6'23\"", "6'20\"", "6'34\"", "6'16\""], "cadence": 175, "aerobicTE": 4.9, "anaerobicTE": 3.3, "trainingFocus": "Tempo"}, "2026-06-27": {"distance": 8.03, "duration": "50:51", "avgPace": "6'20\"", "avgHr": 154, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'12\"", "6'29\"", "6'28\"", "6'19\"", "6'21\"", "6'20\"", "6'15\"", "6'14\"", "5'48\"(末段0.03K)"], "cadence": 172, "aerobicTE": 3.5, "anaerobicTE": 1.9, "trainingFocus": "Tempo"}, "2026-06-24": {"distance": 10.38, "duration": "1:16:21", "avgPace": "7'21\"", "avgHr": 146, "location": "新竹", "splitLabel": "600m×8 間歇分趟配速", "splits": [{"rep": 1, "pace": "4'35\""}, {"rep": 2, "pace": "4'32\""}, {"rep": 3, "pace": "4'32\""}, {"rep": 4, "pace": "4'31\""}, {"rep": 5, "pace": "4'37\""}, {"rep": 6, "pace": "4'43\""}, {"rep": 7, "pace": "4'42\""}, {"rep": 8, "pace": "4'40\""}], "cadence": 178, "cadenceNote": "衝刺趟平均，已排除暖身收操與趟間恢復慢跑", "aerobicTE": 3.9, "anaerobicTE": 4.2, "trainingFocus": "VO2 Max"}, "2026-06-23": {"distance": 8.11, "duration": "53:09", "avgPace": "6'33\"", "avgHr": 156, "location": "新竹", "kmSplitLabel": "每公里配速", "kmSplits": ["6'42\"", "6'52\"", "6'35\"", "6'29\"", "6'32\"", "6'33\"", "6'23\"", "6'21\"", "6'17\"(末段0.11K)"], "cadence": 166, "aerobicTE": 3.7, "anaerobicTE": 1.4, "trainingFocus": "Tempo"}}
 </script>
 <script>
   // 標準賽事距離（公里）常數：放在最前面宣告，避免被任何提早執行的函式（例如頁面載入時就會跑一次的
   // updateProgress）在這個 const 初始化之前就參照到，導致「Cannot access before initialization」整個腳本中斷
   const STANDARD_RACE_DISTANCE_KM = { full: 42.195, half: 21.0975 };
+  // 配速容許值：下限不變，上限 +20 秒（慢20秒內都算達標）。同樣放最前面宣告，避免被提早執行的
+  // updateProgress 相關函式在初始化前就參照到，重蹈之前 STANDARD_RACE_DISTANCE_KM 那次的錯
+  const PACE_SLOW_TOLERANCE_SEC = 20;
 
   // Tab switching
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -4892,6 +5006,7 @@
     updateMileageStats();
     checkInjuryPattern();
     renderPaceZones();
+    renderAchievementDashboard();
   }
 
   // 身體狀況警示：掃描最近3週內「跳過原因」是否重複出現同一種身體不適，及早提醒，不用等真的受傷才發現
@@ -5012,9 +5127,36 @@
 
   // 里程趨勢圖：週／月兩種檢視。長條為規劃量，綠色疊層為已完成，
   // 一眼看出漸進負荷是否合理（漢森法核心：避免單週暴衝）。純 CSS 長條，不依賴外部圖表套件。
-  let MILEAGE_CHART_MODE = 'week'; // 'week' | 'month'
+  // 里程圖跟負荷圖共用同一個時間軸模式與選取狀態，點任一張圖的長條，兩張圖會同步跳到同一段時間
+  let CHART_MODE = 'week'; // 'day' | 'week' | 'month'
+  let CHART_SELECTED_KEY = null;
+  let CHART_SELECTED_INITIALIZED = false;
+  let CHART_MILEAGE_ITEMS = [];
+  let CHART_LOAD_ITEMS = [];
 
-  // 以週為單位彙總（沿用課表的 week-block 分組）
+  // 以日為單位彙總：只顯示最近35天，避免259天全部塞進去太長，
+  // 也讓「日」檢視聚焦在跟訓練負荷圖表可以對照的近期範圍。key 用日期字串，兩張圖共用同一套 key 才能同步
+  function collectDailyMileage() {
+    const todayStr = todayISO();
+    const cutoffDate = new Date(todayStr + 'T00:00:00'); cutoffDate.setDate(cutoffDate.getDate() - 34);
+    const cutoffStr = `${cutoffDate.getFullYear()}-${String(cutoffDate.getMonth() + 1).padStart(2, '0')}-${String(cutoffDate.getDate()).padStart(2, '0')}`;
+    const days = [];
+    document.querySelectorAll('#tab-weekly .day-cell[data-date]').forEach(cell => {
+      const date = cell.dataset.date;
+      if (date < cutoffStr || date > todayStr) return;
+      const contentEl = cell.querySelector('.day-content');
+      const planned = parseDayDistanceKm(contentEl ? contentEl.textContent : '');
+      days.push({
+        key: date, label: date.slice(5).replace('-', '/'), fullLabel: date,
+        planned, done: getActualKmForCell(cell),
+        isCurrent: date === todayStr,
+      });
+    });
+    return days;
+  }
+
+  // 以週為單位彙總（沿用課表的 week-block 分組）。key 用 week-block 的 id（例如 week-6），
+  // 負荷圖的週彙總也是用同一個 id，兩邊「這一週」保證指同一段區間
   function collectWeeklyMileage() {
     const todayStr = todayISO();
     const weeks = [];
@@ -5028,12 +5170,12 @@
         if (cell.dataset.date === todayStr) isCurrent = true;
       });
       const labelEl = block.querySelector('.week-num');
-      weeks.push({ label: labelEl ? labelEl.textContent.trim() : block.id, planned, done, isCurrent });
+      weeks.push({ key: block.id, label: labelEl ? labelEl.textContent.trim() : block.id, planned, done, isCurrent });
     });
     return weeks;
   }
 
-  // 以月為單位彙總（跨週的那一週會依每天實際日期拆到對應月份，不會整週算進同一個月）
+  // 以月為單位彙總（跨週的那一週會依每天實際日期拆到對應月份，不會整週算進同一個月）。key 用年月字串
   function collectMonthlyMileage() {
     const todayMonth = todayISO().slice(0, 7);
     const map = new Map();
@@ -5047,43 +5189,99 @@
       rec.done += getActualKmForCell(cell);
     });
     return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([ym, r]) => ({
-      label: `${+ym.slice(5, 7)}月`,
+      key: ym, label: `${+ym.slice(5, 7)}月`,
       fullLabel: `${ym.slice(0, 4)}年${+ym.slice(5, 7)}月`,
       planned: r.planned, done: r.done, isCurrent: ym === todayMonth,
     }));
   }
 
+  // 共用的日／週／月切換控制項，放在兩張圖表上方
+  function renderChartModeControl() {
+    const box = document.getElementById('chart-mode-control');
+    if (!box) return;
+    box.innerHTML = `
+      <span class="cmc-title">📊 里程／負荷趨勢（點長條，兩圖同步跳到同一段時間）</span>
+      <span class="wmc-mode">
+        <button type="button" class="wmc-mode-btn${CHART_MODE === 'day' ? ' active' : ''}" data-mode="day">日</button>
+        <button type="button" class="wmc-mode-btn${CHART_MODE === 'week' ? ' active' : ''}" data-mode="week">週</button>
+        <button type="button" class="wmc-mode-btn${CHART_MODE === 'month' ? ' active' : ''}" data-mode="month">月</button>
+      </span>`;
+    box.querySelectorAll('.wmc-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (CHART_MODE === btn.dataset.mode) return;
+        CHART_MODE = btn.dataset.mode;
+        CHART_SELECTED_INITIALIZED = false; // 換檔後改用新檔的預設（今天／本週／本月）
+        renderChartModeControl();
+        renderWeeklyMileageChart();
+        renderTrainingLoadChart();
+      });
+    });
+  }
+
+  // 設定共用選取的 key，並同步更新兩張圖的高亮與讀數（不重畫整排長條，避免捲動位置跳掉）
+  function selectChartKey(key) {
+    CHART_SELECTED_KEY = key;
+    CHART_SELECTED_INITIALIZED = true;
+    updateMileageSelectionUI();
+    updateLoadSelectionUI();
+  }
+  function updateMileageSelectionUI() {
+    const box = document.getElementById('weekly-mileage-chart');
+    const readout = document.getElementById('wmc-readout');
+    if (!box || !readout) return;
+    const idx = CHART_MILEAGE_ITEMS.findIndex(it => it.key === CHART_SELECTED_KEY);
+    const w = idx >= 0 ? CHART_MILEAGE_ITEMS[idx] : null;
+    box.querySelectorAll('.wmc-bar-wrap').forEach(el => el.classList.toggle('is-selected', +el.dataset.idx === idx));
+    if (!w) { readout.innerHTML = ''; return; }
+    const pct = w.planned > 0 ? Math.round((w.done / w.planned) * 100) : 0;
+    readout.innerHTML = `<b>${w.fullLabel || w.label}</b>　規劃 <b>${Math.round(w.planned)}K</b>　已完成 <b>${Math.round(w.done)}K</b>（${pct}%）`;
+  }
+  function updateLoadSelectionUI() {
+    const box = document.getElementById('training-load-chart');
+    const readout = document.getElementById('tlc-readout');
+    if (!box || !readout) return;
+    const idx = CHART_LOAD_ITEMS.findIndex(it => it.key === CHART_SELECTED_KEY);
+    const w = idx >= 0 ? CHART_LOAD_ITEMS[idx] : null;
+    box.querySelectorAll('.tlc-bar-wrap').forEach(el => el.classList.toggle('is-selected', +el.dataset.idx === idx));
+    if (!w) {
+      readout.className = 'tlc-readout load-no-data';
+      readout.textContent = '這段時間還沒有負荷資料（COROS 負荷追蹤從 2026-07-10 才開始）';
+      return;
+    }
+    readout.className = 'tlc-readout';
+    readout.innerHTML = `<b>${w.fullLabel || w.label}</b>　長期負荷 <b>${w.avgLoad.toFixed(0)}</b>　最高負荷比 ${w.maxRatio.toFixed(2)}`;
+  }
+
   function renderWeeklyMileageChart() {
     const box = document.getElementById('weekly-mileage-chart');
     if (!box) return;
-    const isMonth = MILEAGE_CHART_MODE === 'month';
-    const items = isMonth ? collectMonthlyMileage() : collectWeeklyMileage();
+    renderChartModeControl();
+    const mode = CHART_MODE;
+    const items = mode === 'month' ? collectMonthlyMileage() : (mode === 'day' ? collectDailyMileage() : collectWeeklyMileage());
+    CHART_MILEAGE_ITEMS = items;
     if (!items.length) { box.innerHTML = ''; return; }
+    const isWide = mode === 'month';
 
     const maxKm = Math.max(...items.map(w => w.planned), 1);
     const barsHtml = items.map((w, i) => {
       const plannedPct = (w.planned / maxKm) * 100;
       const donePct = w.planned > 0 ? Math.min((w.done / w.planned) * 100, 100) : 0;
-      return `<div class="wmc-bar-wrap${w.isCurrent ? ' is-current' : ''}${isMonth ? ' is-wide' : ''}" data-week-index="${i}">
+      return `<div class="wmc-bar-wrap${w.isCurrent ? ' is-current' : ''}${isWide ? ' is-wide' : ''}" data-idx="${i}" data-key="${w.key}">
           <div class="wmc-bar" style="height:${plannedPct.toFixed(1)}%;">
             <div class="wmc-bar-done" style="height:${donePct.toFixed(1)}%;"></div>
           </div>
         </div>`;
     }).join('');
 
-    // 月檢視項目少，每格都標；週檢視 37 格，每 5 週標一次避免擠成一團
-    const axisHtml = items.map((w, i) =>
-      `<span class="${isMonth ? 'is-wide' : ''}">${isMonth ? w.label.replace('月', '') : ((i % 5 === 0) ? w.label.replace(/^W/, '') : '')}</span>`
-    ).join('');
+    // 月檢視項目少，每格都標；日／週檢視格數多，每5格標一次避免擠成一團
+    const axisHtml = items.map((w, i) => {
+      if (isWide) return `<span class="is-wide">${w.label.replace('月', '')}</span>`;
+      const text = mode === 'day' ? w.label : w.label.replace(/^W/, '');
+      return `<span>${(i % 5 === 0) ? text : ''}</span>`;
+    }).join('');
 
     box.innerHTML = `
-      <div class="wmc-head">
-        <span class="wmc-title">📊 里程趨勢（點長條看明細）</span>
-        <span class="wmc-mode">
-          <button type="button" class="wmc-mode-btn${isMonth ? '' : ' active'}" data-mode="week">週</button>
-          <button type="button" class="wmc-mode-btn${isMonth ? ' active' : ''}" data-mode="month">月</button>
-        </span>
-      </div>
+      <div class="wmc-head"><span class="wmc-title">📊 里程</span></div>
       <div class="wmc-scroll"><div class="wmc-inner">
         <div class="wmc-bars">${barsHtml}</div>
         <div class="wmc-axis">${axisHtml}</div>
@@ -5091,26 +5289,15 @@
       <div class="wmc-readout" id="wmc-readout"></div>
       <div class="wmc-legend"><i style="background:var(--hit);"></i>已完成　<i style="background:var(--rest);"></i>規劃量</div>`;
 
-    const readout = box.querySelector('#wmc-readout');
-    const showItem = (i) => {
-      const w = items[i];
-      if (!w) return;
-      const pct = w.planned > 0 ? Math.round((w.done / w.planned) * 100) : 0;
-      readout.innerHTML = `<b>${w.fullLabel || w.label}</b>　規劃 <b>${Math.round(w.planned)}K</b>　已完成 <b>${Math.round(w.done)}K</b>（${pct}%）`;
-      box.querySelectorAll('.wmc-bar-wrap').forEach(el => el.classList.toggle('is-selected', +el.dataset.weekIndex === i));
-    };
     box.querySelectorAll('.wmc-bar-wrap').forEach(el => {
-      el.addEventListener('click', () => showItem(+el.dataset.weekIndex));
+      el.addEventListener('click', () => selectChartKey(el.dataset.key));
     });
-    box.querySelectorAll('.wmc-mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        MILEAGE_CHART_MODE = btn.dataset.mode;
-        renderWeeklyMileageChart();
-      });
-    });
-    // 預設顯示本週／本月（不在訓練期內則顯示最後一項），不用點也看得到數字
-    const idx = items.findIndex(w => w.isCurrent);
-    showItem(idx >= 0 ? idx : items.length - 1);
+    if (!CHART_SELECTED_INITIALIZED) {
+      const cur = items.find(w => w.isCurrent);
+      selectChartKey(cur ? cur.key : items[items.length - 1].key);
+    } else {
+      updateMileageSelectionUI();
+    }
   }
 
   function applyDayStatus(key, entry) {
@@ -6305,6 +6492,47 @@
       <div class="pace-zone-note">＊概略估算（以目標配速為基準加減），非官方配速表，實際請依身體感受微調</div>`;
   }
 
+  // 近4週結構化訓練（間歇/配速跑等有目標配速的訓練）達標率儀表板，
+  // 資料來源跟行事曆彈窗共用同一套判定邏輯（跳過前3公里暖身、上限+20秒容許值）
+  function renderAchievementDashboard() {
+    const box = document.getElementById('achievement-dashboard');
+    if (!box) return;
+    const actualData = loadActualTrainingData();
+    const todayD = new Date(todayISO() + 'T00:00:00');
+    const cutoff = new Date(todayD); cutoff.setDate(cutoff.getDate() - 28);
+    const cellByDate = {};
+    document.querySelectorAll('#tab-weekly .day-cell[data-date]').forEach(cell => { cellByDate[cell.dataset.date] = cell; });
+    let total = 0, success = 0;
+    const items = [];
+    Object.keys(actualData).sort().forEach(date => {
+      const d = new Date(date + 'T00:00:00');
+      if (d < cutoff || d > todayD) return;
+      const rec = actualData[date];
+      if (!rec.splits && !rec.kmSplits) return;
+      const cell = cellByDate[date];
+      if (!cell) return;
+      const contentEl = cell.querySelector('.day-content');
+      const target = parseTargetPaceRange(contentEl ? contentEl.innerHTML : '');
+      if (!target) return;
+      const ok = rec.splits
+        ? computeSessionSuccess(rec.splits.map(s => s.pace), target, 0)
+        : computeSessionSuccess(rec.kmSplits, target, 3);
+      if (ok === null) return;
+      total++;
+      if (ok) success++;
+      items.push({ date, ok });
+    });
+    if (total === 0) {
+      box.innerHTML = '<div class="pace-zone-empty">近4週還沒有可判定達標與否的結構化訓練記錄。</div>';
+      return;
+    }
+    const pct = Math.round((success / total) * 100);
+    box.innerHTML = `
+      <div class="achv-title">📈 近4週結構化訓練達標率</div>
+      <div class="achv-value">${success} / ${total} <small>（${pct}%，含間歇/配速跑等有目標配速的訓練）</small></div>
+      <div class="achv-list">${items.map(it => `<span class="${it.ok ? 'ok' : 'ng'}">${it.date.slice(5)} ${it.ok ? '✓' : '✗'}</span>`).join('')}</div>`;
+  }
+
   // 目標 vs 實際完賽比對：兩者都有資料時才顯示，達標（實際≤目標）顯示綠色，落後顯示紅色
   function buildGoalCompareHtml(goalStr, actualStr) {
     const goalSec = parseTimeToSeconds(goalStr);
@@ -6575,6 +6803,146 @@
 
   // ---- 行事曆分頁：月曆檢視，點選日期彈出當天課表／賽事內容，不用捲動列表 ----
   // 實際訓練記錄：從嵌入的 JSON 資料區塊讀取（由 Claude 每週手動更新，不是即時同步）
+  // 體能評估：COROS 內建計算的 VO2max/跑力/完賽預估，由 Claude 依需求手動更新，非即時同步
+  function loadFitnessAssessment() {
+    const el = document.getElementById('fitness-assessment-data');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+  function renderFitnessAssessment() {
+    const box = document.getElementById('fitness-assessment-box');
+    if (!box) return;
+    const f = loadFitnessAssessment();
+    if (!f) { box.innerHTML = ''; return; }
+    const p = f.predictions || {};
+    box.innerHTML = `
+      <div class="fitness-title">📊 COROS 體能評估（${f.updatedDate} 更新）</div>
+      <div class="fitness-core-row">
+        <div class="fitness-core-item"><div class="fc-label">VO2max</div><div class="fc-value">${f.vo2max}</div></div>
+        <div class="fitness-core-item"><div class="fc-label">跑力等級</div><div class="fc-value">${f.runningLevel}</div></div>
+        <div class="fitness-core-item"><div class="fc-label">閾值配速</div><div class="fc-value">${f.thresholdPace}</div></div>
+      </div>
+      <div class="fitness-predict-grid">
+        <div class="fitness-predict-item"><div class="fp-label">5K</div><div class="fp-value">${p['5k'] || '-'}</div></div>
+        <div class="fitness-predict-item"><div class="fp-label">10K</div><div class="fp-value">${p['10k'] || '-'}</div></div>
+        <div class="fitness-predict-item"><div class="fp-label">半馬</div><div class="fp-value">${p.half || '-'}</div></div>
+        <div class="fitness-predict-item"><div class="fp-label">全馬</div><div class="fp-value">${p.full || '-'}</div></div>
+      </div>
+      <div class="fitness-note">＊COROS 根據近期訓練數據自動推算，非官方認證成績，僅供參考；由 Claude 依需求手動更新</div>`;
+  }
+
+  // 訓練負荷趨勢：COROS 的「長期負荷」大致代表有氧基礎累積程度，短期/長期負荷比超過 1.5
+  // 代表短期內練太猛（Excessive），資料同樣由 Claude 依需求手動更新，不即時同步
+  function loadTrainingLoadData() {
+    const el = document.getElementById('training-load-data');
+    if (!el) return {};
+    try { return JSON.parse(el.textContent) || {}; } catch (e) { return {}; }
+  }
+  function collectDailyLoad() {
+    const data = loadTrainingLoadData();
+    const todayStr = todayISO();
+    return Object.keys(data).sort().map(d => ({
+      key: d, label: d.slice(5).replace('-', '/'), fullLabel: d,
+      avgLoad: data[d].longTerm, maxRatio: data[d].ratio, isCurrent: d === todayStr,
+    }));
+  }
+  // 以週為單位彙總，跟里程圖表用同一套 week-block 分組（key 用 block.id），確保「這一週」指的是同一段區間；
+  // 該週完全沒有負荷資料（例如負荷資料開始追蹤前的週次）就跳過，不畫誤導人的空長條
+  function collectWeeklyLoad() {
+    const data = loadTrainingLoadData();
+    const todayStr = todayISO();
+    const weeks = [];
+    document.querySelectorAll('#tab-weekly .week-block[id]').forEach(block => {
+      const dates = [...block.querySelectorAll('.day-cell[data-date]')].map(c => c.dataset.date);
+      const recs = dates.map(d => data[d]).filter(Boolean);
+      if (!recs.length) return;
+      const labelEl = block.querySelector('.week-num');
+      weeks.push({
+        key: block.id,
+        label: labelEl ? labelEl.textContent.trim() : block.id,
+        avgLoad: recs.reduce((s, r) => s + r.longTerm, 0) / recs.length,
+        maxRatio: Math.max(...recs.map(r => r.ratio)),
+        isCurrent: dates.includes(todayStr),
+      });
+    });
+    return weeks;
+  }
+  function collectMonthlyLoad() {
+    const data = loadTrainingLoadData();
+    const todayMonth = todayISO().slice(0, 7);
+    const map = new Map();
+    Object.keys(data).forEach(d => {
+      const ym = d.slice(0, 7);
+      if (!map.has(ym)) map.set(ym, []);
+      map.get(ym).push(data[d]);
+    });
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([ym, recs]) => ({
+      key: ym, label: `${+ym.slice(5, 7)}月`, fullLabel: `${ym.slice(0, 4)}年${+ym.slice(5, 7)}月`,
+      avgLoad: recs.reduce((s, r) => s + r.longTerm, 0) / recs.length,
+      maxRatio: Math.max(...recs.map(r => r.ratio)),
+      isCurrent: ym === todayMonth,
+    }));
+  }
+
+  function renderTrainingLoadChart() {
+    const box = document.getElementById('training-load-chart');
+    if (!box) return;
+    const mode = CHART_MODE;
+    const items = mode === 'month' ? collectMonthlyLoad() : (mode === 'week' ? collectWeeklyLoad() : collectDailyLoad());
+    CHART_LOAD_ITEMS = items;
+    if (!items.length) { box.innerHTML = ''; return; }
+    const isWide = mode === 'month';
+
+    const maxLoad = Math.max(...items.map(w => w.avgLoad), 1);
+    const barsHtml = items.map((w, i) => {
+      const pct = (w.avgLoad / maxLoad) * 100;
+      const cls = ['tlc-bar-wrap'];
+      if (w.isCurrent) cls.push('is-today');
+      if (w.maxRatio > 1.5) cls.push('is-excessive');
+      if (isWide) cls.push('is-wide');
+      return `<div class="${cls.join(' ')}" data-idx="${i}" data-key="${w.key}"><div class="tlc-bar" style="height:${pct.toFixed(1)}%;"></div></div>`;
+    }).join('');
+    const axisHtml = items.map((w, i) => {
+      if (isWide) return `<span class="is-wide">${w.label.replace('月', '')}</span>`;
+      const text = mode === 'day' ? w.label : w.label.replace(/^W/, '');
+      return `<span>${(i % 5 === 0) ? text : ''}</span>`;
+    }).join('');
+
+    box.innerHTML = `
+      <div class="wmc-head"><span class="tlc-title">📈 長期負荷（紅色＝負荷比過量）</span></div>
+      <div class="tlc-scroll"><div class="tlc-inner">
+        <div class="tlc-bars">${barsHtml}</div>
+        <div class="tlc-axis">${axisHtml}</div>
+      </div></div>
+      <div class="tlc-readout" id="tlc-readout"></div>
+      <div class="tlc-legend">＊長期負荷可視為有氧基礎累積程度，數字持續上升代表基礎在建立；負荷比(短期/長期)超過1.5代表短期內練太猛。週／月為區間內平均值與最高負荷比</div>`;
+
+    box.querySelectorAll('.tlc-bar-wrap').forEach(el => {
+      el.addEventListener('click', () => selectChartKey(el.dataset.key));
+    });
+    if (!CHART_SELECTED_INITIALIZED) {
+      const cur = items.find(w => w.isCurrent);
+      selectChartKey(cur ? cur.key : items[items.length - 1].key);
+    } else {
+      updateLoadSelectionUI();
+    }
+  }
+  function renderLoadOverloadBanner() {
+    const banner = document.getElementById('load-overload-banner');
+    if (!banner) return;
+    const data = loadTrainingLoadData();
+    const todayD = new Date(todayISO() + 'T00:00:00');
+    const cutoff = new Date(todayD); cutoff.setDate(cutoff.getDate() - 21);
+    const excessive = Object.keys(data).filter(d => {
+      const dt = new Date(d + 'T00:00:00');
+      return dt >= cutoff && dt <= todayD && data[d].ratio > 1.5;
+    }).sort();
+    if (!excessive.length) { banner.style.display = 'none'; return; }
+    banner.innerHTML = '⚡ <b>訓練負荷提醒</b>（近3週負荷比超過1.5，短期內練太猛）<br>' +
+      excessive.map(d => `・${d}（負荷比 ${data[d].ratio.toFixed(2)}）`).join('<br>');
+    banner.style.display = '';
+  }
+
   function loadActualTrainingData() {
     const el = document.getElementById('actual-training-data');
     if (!el) return {};
@@ -6744,12 +7112,61 @@
     if (!m) return null;
     return parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
   }
+  // 配速容許值：下限不變，上限 +20 秒（慢20秒內都算達標）
+  // 回傳 'split-fast'（比下限快，淺藍）｜'split-hit'（達標，綠）｜'split-miss'（超出容許範圍，紅）｜''（不列入判定）
   function splitHitClass(str, target) {
     if (!target) return '';
     const sec = parsePaceLabelToSeconds(str);
     if (sec === null) return '';
-    return (sec >= target.min && sec <= target.max) ? ' split-hit' : ' split-miss';
+    if (sec < target.min) return ' split-fast';
+    if (sec <= target.max + PACE_SLOW_TOLERANCE_SEC) return ' split-hit';
+    return ' split-miss';
   }
+  // 每公里配速的前3公里當暖身，不列入判定（間歇的暖身趟已經用括號註記處理，不用這個函式）
+  function kmSplitHitClass(str, index, target) {
+    if (index < 3) return '';
+    return splitHitClass(str, target);
+  }
+  // 判斷這次訓練整體算不算「達標」：扣掉暖身/末段/前3公里後，只要沒有紅色（miss）就算成功；
+  // 過快（split-fast）不算失敗。沒有任何可判定的段落時回傳 null（無法判定）
+  function computeSessionSuccess(items, target, skipFirstN) {
+    if (!target) return null;
+    let judged = 0, missed = 0;
+    items.forEach((str, i) => {
+      if (skipFirstN && i < skipFirstN) return;
+      const cls = splitHitClass(str, target).trim();
+      if (!cls) return;
+      judged++;
+      if (cls === 'split-miss') missed++;
+    });
+    if (judged === 0) return null;
+    return missed === 0;
+  }
+  // 長跑正負分段分析：把每公里配速（扣掉暖身/末段）分成前後兩半，比較平均配速，
+  // 負值代表後段比前段快（negative split，訓練品質通常較理想），正值代表後段掉速
+  function computeNegativeSplit(kmSplits) {
+    if (!kmSplits || kmSplits.length < 10) return null;
+    const paces = kmSplits.map(parsePaceLabelToSeconds).filter(s => s !== null);
+    if (paces.length < 8) return null;
+    const mid = Math.floor(paces.length / 2);
+    const avg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+    const firstAvg = avg(paces.slice(0, mid));
+    const secondAvg = avg(paces.slice(mid));
+    return { firstAvg, secondAvg, diff: secondAvg - firstAvg };
+  }
+
+  // 格式化一個秒數差距（不帶正負號），例如 12 -> 0'12"，75 -> 1'15"
+  function fmtSecDiff(sec) {
+    const abs = Math.round(Math.abs(sec));
+    const m = Math.floor(abs / 60), s = abs % 60;
+    return `${m}'${String(s).padStart(2, '0')}"`;
+  }
+
+  // COROS 訓練焦點的中文對照，找不到對應的就直接顯示原文，不會壞掉
+  const TRAINING_FOCUS_ZH = {
+    'Base': '基礎有氧', 'Tempo': '節奏跑', 'Threshold': '乳酸閾值',
+    'VO2 Max': '最大攝氧量', 'Anaerobic': '無氧',
+  };
 
   function showCalendarDayModal(dateStr, entry) {
     const modal = document.getElementById('calendar-day-modal');
@@ -6775,6 +7192,10 @@
     if (entry.actual) {
       const a = entry.actual;
       const target = entry.training ? parseTargetPaceRange(entry.training.html) : null;
+      const negSplit = a.kmSplits ? computeNegativeSplit(a.kmSplits) : null;
+      const sessionOk = a.splits
+        ? computeSessionSuccess(a.splits.map(s => s.pace), target, 0)
+        : (a.kmSplits ? computeSessionSuccess(a.kmSplits, target, 3) : null);
       html += `<div class="cal-modal-actual">
         <div class="cal-modal-actual-title">🏃 實際記錄${a.indoor ? '（室內）' : ''}</div>
         <div class="cal-modal-actual-row"><span>距離</span><b>${a.distance} km</b></div>
@@ -6782,16 +7203,22 @@
         <div class="cal-modal-actual-row"><span>平均配速</span><b>${a.avgPace}/km</b></div>
         <div class="cal-modal-actual-row"><span>平均心率</span><b>${a.avgHr} bpm</b></div>
         ${a.location ? `<div class="cal-modal-actual-row"><span>地點</span><b>${a.location}</b></div>` : ''}
+        ${a.cadence ? `<div class="cal-modal-actual-row"><span>步頻${a.cadenceNote ? '＊' : ''}</span><b>${a.cadence} spm</b></div>` : ''}
+        ${a.trainingFocus ? `<div class="cal-modal-actual-row"><span>訓練焦點</span><b>${TRAINING_FOCUS_ZH[a.trainingFocus] || a.trainingFocus}</b></div>` : ''}
+        ${(a.aerobicTE !== undefined) ? `<div class="cal-modal-actual-row"><span>有氧效果 / 無氧效果</span><b>${a.aerobicTE} / ${a.anaerobicTE}</b></div>` : ''}
+        ${sessionOk !== null ? `<div class="session-result-badge ${sessionOk ? 'ok' : 'ng'}">${sessionOk ? '🎯 本次訓練達標' : '📌 本次訓練未達標'}</div>` : ''}
         ${a.splits ? `
           <div class="cal-modal-actual-splits-title">${a.splitLabel || '分趟配速'}</div>
           <div class="cal-modal-actual-splits">${a.splits.map(s => `<span class="split-chip${splitHitClass(s.pace, target)}">第${s.rep}趟 ${s.pace}</span>`).join('')}</div>
         ` : ''}
         ${a.kmSplits ? `
-          <div class="cal-modal-actual-splits-title">${a.kmSplitLabel || '每公里配速'}</div>
-          <div class="cal-modal-actual-splits">${a.kmSplits.map((p, i) => `<span class="split-chip${splitHitClass(p, target)}">${i + 1}K ${p}</span>`).join('')}</div>
+          <div class="cal-modal-actual-splits-title">${a.kmSplitLabel || '每公里配速'}${target ? '（前3公里視為暖身，不列入判定）' : ''}</div>
+          <div class="cal-modal-actual-splits">${a.kmSplits.map((p, i) => `<span class="split-chip${kmSplitHitClass(p, i, target)}">${i + 1}K ${p}</span>`).join('')}</div>
         ` : ''}
-        ${target ? `<div class="cal-modal-actual-legend"><span class="split-chip split-hit">達標</span><span class="split-chip split-miss">未達標</span><span class="split-chip">不列入判定（暖身/末段等）</span></div>` : ''}
-        <div class="cal-modal-actual-note">＊由 Claude 依需求手動更新，非即時同步</div>
+        ${negSplit ? `<div class="cal-modal-negsplit">📊 前後半程比較：前段均速 ${fmtPaceSec(negSplit.firstAvg)}／km、後段均速 ${fmtPaceSec(negSplit.secondAvg)}／km（${negSplit.diff <= 0 ? `後段快 ${fmtSecDiff(negSplit.diff)}` : `後段慢 ${fmtSecDiff(negSplit.diff)}`}）</div>` : ''}
+        ${target ? `<div class="cal-modal-actual-legend"><span class="split-chip split-fast">過快</span><span class="split-chip split-hit">達標</span><span class="split-chip split-miss">未達標</span><span class="split-chip">不列入判定</span></div>` : ''}
+        ${a.cadenceNote ? `<div class="cal-modal-actual-note">＊步頻：${a.cadenceNote}</div>` : ''}
+        <div class="cal-modal-actual-note">＊由 Claude 依需求手動更新，非即時同步。達標容許值：目標上限 +20 秒</div>
       </div>`;
     }
     body.innerHTML = html || '這天沒有排定課表。';
@@ -6862,6 +7289,9 @@
   applyRacePrimaryStatus();
   applyRaceGoalInputs();
   renderPBSummary();
+  renderFitnessAssessment();
+  renderTrainingLoadChart();
+  renderLoadOverloadBanner();
   renderRaceConflictCheck();
   renderRaceDensityCheck();
   renderWishlist();
